@@ -1,16 +1,15 @@
 package com.github.patbattb.tgbot_photomoderator;
-
+import lombok.EqualsAndHashCode;
 import lombok.Value;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
-import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Value
+@EqualsAndHashCode(callSuper=true)
 public class TgBot extends TelegramLongPollingBot {
 
     String botUsername;
@@ -19,7 +18,6 @@ public class TgBot extends TelegramLongPollingBot {
         super(botToken);
         this.botUsername = botUsername;
     }
-
 
     @Override
     public void onUpdateReceived(Update update) {
