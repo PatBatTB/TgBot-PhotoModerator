@@ -1,4 +1,4 @@
-package com.github.patbattb.tgbot_photomoderator.keyboard;
+package com.github.patbattb.tgbot_photomoderator.service.keyboard;
 
 import com.github.patbattb.tgbot_photomoderator.button.InlineButton;
 import lombok.experimental.UtilityClass;

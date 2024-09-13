@@ -1,7 +1,7 @@
-package com.github.patbattb.tgbot_photomoderator;
+package com.github.patbattb.tgbot_photomoderator.service.method;
 
 import com.github.patbattb.tgbot_photomoderator.button.InlineButton;
-import com.github.patbattb.tgbot_photomoderator.keyboard.KeyboardProvider;
+import com.github.patbattb.tgbot_photomoderator.service.keyboard.KeyboardProvider;
 import lombok.Value;
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
@@ -17,7 +17,7 @@ import java.util.List;
 public class MessageParser {
     List<BotApiMethod<?>> messageList = new ArrayList<>();
 
-    List<BotApiMethod<?>> parse (Update update) {
+    public List<BotApiMethod<?>> parse (Update update) {
         if (update.hasMessage() && update.getMessage().hasText()) {
             Message message = update.getMessage();
             String chatId = message.getChatId().toString();

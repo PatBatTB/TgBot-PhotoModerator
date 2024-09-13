@@ -1,10 +1,12 @@
 package com.github.patbattb.tgbot_photomoderator;
 
+import com.github.patbattb.tgbot_photomoderator.domain.TgBot;
 import org.telegram.telegrambots.meta.TelegramBotsApi;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
 
 public class App {
+
     public static void main(String[] args) {
         TgBot bot = new TgBot(System.getenv("botUsername"), System.getenv("botToken"));
         try {
