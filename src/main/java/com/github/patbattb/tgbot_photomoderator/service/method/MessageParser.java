@@ -1,62 +1,52 @@
 package com.github.patbattb.tgbot_photomoderator.service.method;
 
 import com.github.patbattb.tgbot_photomoderator.button.InlineButton;
-import com.github.patbattb.tgbot_photomoderator.domain.Props;
-import com.github.patbattb.tgbot_photomoderator.domain.UserGroup;
-import com.github.patbattb.tgbot_photomoderator.service.json.JsonHandler;
+import com.github.patbattb.tgbot_photomoderator.component.MethodContainer;
+import com.github.patbattb.tgbot_photomoderator.component.UpdateType;
 import com.github.patbattb.tgbot_photomoderator.service.keyboard.KeyboardProvider;
-import lombok.Value;
+import lombok.experimental.UtilityClass;
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageText;
-import org.telegram.telegrambots.meta.api.objects.CallbackQuery;
-import org.telegram.telegrambots.meta.api.objects.Message;
-import org.telegram.telegrambots.meta.api.objects.Update;
 
-import java.util.ArrayList;
 import java.util.List;
 
-@Value
+@UtilityClass
 public class MessageParser {
-    List<BotApiMethod<?>> messageList = new ArrayList<>();
 
-    public List<BotApiMethod<?>> parse (Update update) {
-        if (update.hasMessage() && update.getMessage().hasText()) {
-            Message message = update.getMessage();
-            String chatId = message.getChatId().toString();
-            String userName = message.getChat().getUserName();
-            System.out.printf("%s (%s)(message): %s\n", userName, chatId, message.getText());
+    public static List<BotApiMethod<?>> parse (MethodContainer methodContainer) {
+        if (UpdateType.MESSAGE.equals(methodContainer.getType())) {
+            System.out.printf("%s (%s)(message): %s\n",
+                    methodContainer.getUserName(),
+                    methodContainer.getChatId(),
+                    methodContainer.getUpdate().getMessage().getText());
             SendMessage answer = new SendMessage();
-            answer.setChatId(chatId);
+            answer.setChatId(methodContainer.getChatId());
             answer.setText("menu");
             answer.setReplyMarkup(KeyboardProvider.getYesNoKeyboardMarkup());
-            messageList.add(answer);
-            Props.Container.getUsers().get(UserGroup.ADMIN).add(chatId);
-            JsonHandler.saveData();
+            methodContainer.getMessageList().add(answer);
         }
-        if (update.hasCallbackQuery()) {
-            CallbackQuery callbackQuery = update.getCallbackQuery();
-            String chatId = callbackQuery.getMessage().getChatId().toString();
-            Integer messageId = callbackQuery.getMessage().getMessageId();
-            String data = callbackQuery.getData();
-            String userName = callbackQuery.getFrom().getUserName();
-            System.out.printf("%s (%s)(callback): %s\n", userName, chatId, data);
+        if (UpdateType.CALLBACK_QUERY.equals(methodContainer.getType())) {
+            System.out.printf("%s (%s)(callback): %s\n",
+                    methodContainer.getUserName(),
+                    methodContainer.getChatId(),
+                    methodContainer.getCallbackData());
             EditMessageText newMessage = EditMessageText.builder()
-                    .chatId(chatId)
-                    .messageId(messageId)
+                    .chatId(methodContainer.getChatId())
+                    .messageId(methodContainer.getMessageId())
                     .text("error")
                     .build();
-            if (InlineButton.YES.getData().equals(data)) {
+            if (InlineButton.YES.getData().equals(methodContainer.getCallbackData())) {
                 newMessage.setText("Press \"Confirm\"");
                 newMessage.setReplyMarkup(KeyboardProvider.getConfirmKeyboardMarkup());
-            } else if (InlineButton.NO.getData().equals(data)) {
+            } else if (InlineButton.NO.getData().equals(methodContainer.getCallbackData())) {
                 newMessage.setText("Canceled.");
-            } else if (InlineButton.CONFIRM.getData().equals(data)) {
+            } else if (InlineButton.CONFIRM.getData().equals(methodContainer.getCallbackData())) {
                 newMessage.setText("Confirmed");
             }
-            messageList.add(newMessage);
+            methodContainer.getMessageList().add(newMessage);
 
         }
-        return messageList;
+        return methodContainer.getMessageList();
     }
 }
