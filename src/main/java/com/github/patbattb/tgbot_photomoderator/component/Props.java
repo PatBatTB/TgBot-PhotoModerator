@@ -51,5 +51,17 @@ public class Props {
                         return result;
                 }
 
+                public static UserGroup getUserGroup(String userId) {
+                        UserGroup groupOther = UserGroup.OTHER;
+                        for (Map.Entry<UserGroup, Set<String>> entry: users.entrySet()) {
+                                for (String value: entry.getValue()) {
+                                        if (value.equals(userId)) {
+                                                return entry.getKey();
+                                        }
+                                }
+                        }
+                        return groupOther;
+                }
+
         }
 }

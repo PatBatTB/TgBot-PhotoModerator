@@ -1,5 +1,5 @@
 package com.github.patbattb.tgbot_photomoderator.component;
-import com.github.patbattb.tgbot_photomoderator.service.method.MessageParser;
+import com.github.patbattb.tgbot_photomoderator.service.method.MethodParser;
 import lombok.EqualsAndHashCode;
 import lombok.Value;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
@@ -23,7 +23,7 @@ public class TgBot extends TelegramLongPollingBot {
 
     @Override
     public void onUpdateReceived(Update update) {
-        List <BotApiMethod<?>> list = MessageParser.parse(new MethodContainer(update));
+        List <BotApiMethod<?>> list = MethodParser.parse(new MethodContainer(update));
         try {
             for (BotApiMethod<?> mes: list) {
                 execute(mes);

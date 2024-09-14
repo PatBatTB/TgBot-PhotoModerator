@@ -13,13 +13,14 @@ public class MethodContainer {
     private final Update update;
     private final String chatId;
     private final String userName;
-    private final List<BotApiMethod<?>> messageList;
+    private final List<BotApiMethod<?>> methodList;
     private final String callbackData;
     private final Integer messageId;
+    private final UserGroup userGroup;
 
     public MethodContainer(Update update) {
         this.update = update;
-        messageList = new ArrayList<>();
+        this.methodList = new ArrayList<>();
         if (update.hasMessage() && update.getMessage().hasText()) {
             this.type = UpdateType.MESSAGE;
             this.chatId = update.getMessage().getChatId().toString();
@@ -35,5 +36,6 @@ public class MethodContainer {
         } else {
             throw new RuntimeException("Unknown message type");
         }
+        this.userGroup = Props.Container.getUserGroup(this.chatId);
     }
 }
