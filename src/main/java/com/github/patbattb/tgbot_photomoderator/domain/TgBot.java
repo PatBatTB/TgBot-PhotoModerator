@@ -14,12 +14,11 @@ import java.util.List;
 public class TgBot extends TelegramLongPollingBot {
 
     String botUsername;
-    DataContainer dataContainer;
 
     public TgBot (String botUsername, String botToken) {
         super(botToken);
         this.botUsername = botUsername;
-        dataContainer = new DataContainer();
+        Props.init();
     }
 
     @Override

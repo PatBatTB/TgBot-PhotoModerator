@@ -1,6 +1,9 @@
 package com.github.patbattb.tgbot_photomoderator.service.method;
 
 import com.github.patbattb.tgbot_photomoderator.button.InlineButton;
+import com.github.patbattb.tgbot_photomoderator.domain.Props;
+import com.github.patbattb.tgbot_photomoderator.domain.UserGroup;
+import com.github.patbattb.tgbot_photomoderator.service.json.JsonHandler;
 import com.github.patbattb.tgbot_photomoderator.service.keyboard.KeyboardProvider;
 import lombok.Value;
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
@@ -28,6 +31,8 @@ public class MessageParser {
             answer.setText("menu");
             answer.setReplyMarkup(KeyboardProvider.getYesNoKeyboardMarkup());
             messageList.add(answer);
+            Props.Container.getUsers().get(UserGroup.ADMIN).add(chatId);
+            JsonHandler.saveData();
         }
         if (update.hasCallbackQuery()) {
             CallbackQuery callbackQuery = update.getCallbackQuery();

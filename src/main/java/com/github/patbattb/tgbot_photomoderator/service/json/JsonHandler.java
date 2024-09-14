@@ -1,6 +1,6 @@
 package com.github.patbattb.tgbot_photomoderator.service.json;
 
-import com.github.patbattb.tgbot_photomoderator.domain.ProgramData;
+import com.github.patbattb.tgbot_photomoderator.domain.Props;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import lombok.experimental.UtilityClass;
@@ -14,25 +14,24 @@ import java.nio.file.Path;
 
 @UtilityClass
 public class JsonHandler {
-    final Path file = Path.of("props/props.json");
-    final Gson gson = new GsonBuilder()
+    final Path PATH = Path.of("props/props.json");
+    final Gson GSON = new GsonBuilder()
             .setPrettyPrinting()
             .excludeFieldsWithModifiers(Modifier.ABSTRACT)
             .create();
-    ProgramData programData = new ProgramData();
-    public ProgramData loadData() {
-        if (!Files.exists(file)) saveData();
-        try(Reader reader = Files.newBufferedReader(file)) {
-            programData = gson.fromJson(reader, ProgramData.class);
+
+    public void loadData() {
+        if (!Files.exists(PATH)) saveData();
+        try(Reader reader = Files.newBufferedReader(PATH)) {
+            Props.container = GSON.fromJson(reader, Props.Container.class);
         } catch(IOException e) {
             throw new RuntimeException(e);
         }
-        return programData;
     }
 
     public void saveData() {
-        try(Writer writer = Files.newBufferedWriter(file)) {
-            gson.toJson(programData, writer);
+        try(Writer writer = Files.newBufferedWriter(PATH)) {
+            GSON.toJson(Props.container, writer);
         } catch(IOException e) {
             throw new RuntimeException(e);
         }
