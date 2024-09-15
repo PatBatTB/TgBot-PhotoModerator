@@ -4,6 +4,7 @@ import com.github.patbattb.tgbot_photomoderator.button.InlineButton;
 import com.github.patbattb.tgbot_photomoderator.component.MethodContainer;
 import com.github.patbattb.tgbot_photomoderator.component.UpdateType;
 import com.github.patbattb.tgbot_photomoderator.service.keyboard.KeyboardProvider;
+import com.github.patbattb.tgbot_photomoderator.service.menu.MenuProvider;
 import lombok.experimental.UtilityClass;
 import lombok.extern.slf4j.Slf4j;
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
@@ -17,7 +18,7 @@ import java.util.List;
 public class MethodParser {
 
     public static List<BotApiMethod<?>> parse (MethodContainer methodContainer) {
-
+        MenuProvider.setGroupMenu(methodContainer);
         if (UpdateType.MESSAGE.equals(methodContainer.getType())) {
             log.debug("{}[{}](message): {}\n",
                     methodContainer.getUserName(),
