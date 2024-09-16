@@ -1,5 +1,6 @@
 package com.github.patbattb.tgbot_photomoderator.component;
 
+import com.github.patbattb.tgbot_photomoderator.service.handling.update.UpdateType;
 import lombok.Data;
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
 import org.telegram.telegrambots.meta.api.objects.Update;
@@ -21,7 +22,7 @@ public class MethodContainer {
     public MethodContainer(Update update) {
         this.update = update;
         this.methodList = new ArrayList<>();
-        if (update.hasMessage() && update.getMessage().hasText()) {
+        if (update.hasMessage()) {
             this.type = UpdateType.MESSAGE;
             this.chatId = update.getMessage().getChatId().toString();
             this.userName = update.getMessage().getChat().getUserName();

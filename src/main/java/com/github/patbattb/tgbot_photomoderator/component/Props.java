@@ -52,7 +52,6 @@ public class Props {
                 }
 
                 public static UserGroup getUserGroup(String userId) {
-                        UserGroup groupOther = UserGroup.OTHER;
                         for (Map.Entry<UserGroup, Set<String>> entry: users.entrySet()) {
                                 for (String value: entry.getValue()) {
                                         if (value.equals(userId)) {
@@ -60,7 +59,7 @@ public class Props {
                                         }
                                 }
                         }
-                        return groupOther;
+                        return UserGroup.OTHER;
                 }
 
         }

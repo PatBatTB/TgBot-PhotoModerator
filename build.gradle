@@ -4,7 +4,7 @@ plugins {
 }
 
 group = 'com.github.patbattb'
-version = '0.0.2'
+version = '0.1.0'
 def mainClass = 'com.github.patbattb.tgbot_photomoderator.App'
 def vendorName = 'PatBatTB'
 
