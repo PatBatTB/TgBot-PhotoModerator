@@ -19,6 +19,7 @@ public class Props {
         }
 
         public static class Container {
+                @SuppressWarnings("FieldMayBeFinal")
                 private static Map<UserGroup, Set<String>> users;
                 @Getter
                 @Setter

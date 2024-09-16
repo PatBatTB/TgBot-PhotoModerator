@@ -1,6 +1,8 @@
 package com.github.patbattb.tgbot_photomoderator.service.keyboard;
 
-import com.github.patbattb.tgbot_photomoderator.button.InlineButton;
+import com.github.patbattb.tgbot_photomoderator.component.InlineButton;
+import com.github.patbattb.tgbot_photomoderator.component.InlineLevel;
+import com.github.patbattb.tgbot_photomoderator.service.handling.callback.CallBackParser;
 import lombok.experimental.UtilityClass;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
@@ -10,23 +12,22 @@ import java.util.List;
 @UtilityClass
 public class KeyboardProvider {
 
-    public InlineKeyboardMarkup getYesNoKeyboardMarkup() {
-        InlineKeyboardButton buttonYes = InlineKeyboardButton.builder()
-                .text(InlineButton.YES.getText())
-                .callbackData(InlineButton.YES.getData())
+    public InlineKeyboardMarkup getMainAdminPanel() {
+        String level = InlineLevel.ADMIN.getName();
+        var channelButton = InlineKeyboardButton.builder()
+                .text(InlineButton.CHANNEL.getText())
+                .callbackData(CallBackParser.build(level, InlineButton.CHANNEL.getName()))
                 .build();
-        InlineKeyboardButton buttonNo = InlineKeyboardButton.builder()
-                .text(InlineButton.NO.getText())
-                .callbackData(InlineButton.NO.getData())
+        var userButton = InlineKeyboardButton.builder()
+                .text(InlineButton.USER.getText())
+                .callbackData(CallBackParser.build(level, InlineButton.USER.getName()))
                 .build();
-        return new InlineKeyboardMarkup(List.of(List.of(buttonYes, buttonNo)));
-    }
-
-    public InlineKeyboardMarkup getConfirmKeyboardMarkup() {
-        InlineKeyboardButton buttonConfirm = InlineKeyboardButton.builder()
-                .text(InlineButton.CONFIRM.getText())
-                .callbackData(InlineButton.CONFIRM.getData())
+        var rowOne = List.of(channelButton, userButton);
+        var closeButton = InlineKeyboardButton.builder()
+                .text(InlineButton.CLOSE.getText())
+                .callbackData(CallBackParser.build(level, InlineButton.CLOSE.getName()))
                 .build();
-        return new InlineKeyboardMarkup(List.of(List.of(buttonConfirm)));
+        var rowTwo = List.of(closeButton);
+        return new InlineKeyboardMarkup(List.of(rowOne, rowTwo));
     }
 }

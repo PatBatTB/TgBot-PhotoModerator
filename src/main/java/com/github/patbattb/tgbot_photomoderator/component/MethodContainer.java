@@ -1,5 +1,6 @@
 package com.github.patbattb.tgbot_photomoderator.component;
 
+import com.github.patbattb.tgbot_photomoderator.service.handling.callback.CallBackParser;
 import com.github.patbattb.tgbot_photomoderator.service.handling.update.UpdateType;
 import lombok.Data;
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
@@ -15,7 +16,7 @@ public class MethodContainer {
     private final String chatId;
     private final String userName;
     private final List<BotApiMethod<?>> methodList;
-    private final String callbackData;
+    private final CallBackData callbackData;
     private final Integer messageId;
     private final UserGroup userGroup;
 
@@ -32,7 +33,7 @@ public class MethodContainer {
             this.type = UpdateType.CALLBACK_QUERY;
             this.chatId = update.getCallbackQuery().getMessage().getChatId().toString();
             this.userName = update.getCallbackQuery().getFrom().getUserName();
-            this.callbackData = update.getCallbackQuery().getData();
+            this.callbackData = CallBackParser.parse(update.getCallbackQuery().getData());
             this.messageId = update.getCallbackQuery().getMessage().getMessageId();
         } else {
             throw new RuntimeException("Unknown message type");
