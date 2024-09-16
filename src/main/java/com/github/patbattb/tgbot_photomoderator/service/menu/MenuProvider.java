@@ -1,6 +1,6 @@
 package com.github.patbattb.tgbot_photomoderator.service.menu;
 
-import com.github.patbattb.tgbot_photomoderator.component.Menu;
+import com.github.patbattb.tgbot_photomoderator.component.Command;
 import com.github.patbattb.tgbot_photomoderator.component.MethodContainer;
 import lombok.experimental.UtilityClass;
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
@@ -18,10 +18,11 @@ public class MenuProvider {
 
     public static BotApiMethod<?> getGroupMenu(MethodContainer methodContainer) {
         List<BotCommand> botCommandList = new ArrayList<>();
-        List<Menu> menuList = Arrays.stream(Menu.values())
+        List<Command> commandList = Arrays.stream(Command.values())
+                .filter(Command::isMenuCommand)
                 .filter(elem -> elem.getScope().contains(methodContainer.getUserGroup()))
                 .toList();
-        menuList.forEach(elem -> botCommandList.add(new BotCommand(elem.getName(), elem.getDescription())));
+        commandList.forEach(elem -> botCommandList.add(new BotCommand(elem.getName(), elem.getDescription())));
         BotCommandScopeChat scope = new BotCommandScopeChat(methodContainer.getChatId());
         return (botCommandList.isEmpty()) ?
             new DeleteMyCommands(scope, null) :
