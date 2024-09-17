@@ -1,0 +1,15 @@
+package com.github.patbattb.tgbot_photomoderator.service.handling.callback;
+
+import com.github.patbattb.tgbot_photomoderator.component.MethodContainer;
+import lombok.Value;
+import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
+
+@Value
+public class CallbackLevelExecutorDefault implements CallbackLevelExecutor {
+    @Override
+    public void execute(MethodContainer methodContainer) {
+        //TODO
+        //Mock
+        methodContainer.getMethodList().add(new SendMessage(methodContainer.getChatId(), this.toString()));
+    }
+}

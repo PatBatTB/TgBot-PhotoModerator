@@ -2,7 +2,6 @@ package com.github.patbattb.tgbot_photomoderator.service.handling.command;
 
 import com.github.patbattb.tgbot_photomoderator.component.Command;
 import com.github.patbattb.tgbot_photomoderator.component.MethodContainer;
-import com.github.patbattb.tgbot_photomoderator.service.handling.command.executor.*;
 import lombok.experimental.UtilityClass;
 
 import java.util.Map;

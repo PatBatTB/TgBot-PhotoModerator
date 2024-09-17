@@ -1,10 +1,6 @@
 package com.github.patbattb.tgbot_photomoderator.service.handling.message;
 
 import com.github.patbattb.tgbot_photomoderator.component.MethodContainer;
-import com.github.patbattb.tgbot_photomoderator.service.handling.message.executor.MessageTypeExecutor;
-import com.github.patbattb.tgbot_photomoderator.service.handling.message.executor.MessageTypeExecutorCommand;
-import com.github.patbattb.tgbot_photomoderator.service.handling.message.executor.MessageTypeExecutorDefault;
-import com.github.patbattb.tgbot_photomoderator.service.handling.message.executor.MessageTypeExecutorText;
 import lombok.experimental.UtilityClass;
 import org.telegram.telegrambots.meta.api.objects.Message;
 
