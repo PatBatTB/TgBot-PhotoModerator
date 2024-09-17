@@ -4,6 +4,6 @@ import lombok.experimental.UtilityClass;
 
 @UtilityClass
 public class AdminPanelTitle {
-    public String MAIN_TITLE = "Панель администратора";
-    public String USER_TITLE = "Панель администратора\n  ∟  Управление пользователями";
+    public String MAIN_TITLE = "Панель администратора\n";
+    public String USER_TITLE = MAIN_TITLE + "  ∟  Управление пользователями\n";
 }
