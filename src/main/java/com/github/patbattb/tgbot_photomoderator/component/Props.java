@@ -6,7 +6,7 @@ import lombok.Setter;
 
 import java.util.*;
 
-public class Props {
+public final class Props {
 
         public static Container container = new Container();
 

@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Data
-public class MethodContainer {
+public final class MethodContainer {
     private final UpdateType type;
     private final Update update;
     private final String chatId;

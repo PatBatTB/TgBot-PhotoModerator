@@ -4,12 +4,12 @@ import lombok.Getter;
 
 @Getter
 public enum InlineLevel {
-    ADMIN("adminLevel"),
-    CHANNEL("channelLevel"),
-    USER("userLevel"),
-    ADMIN_CONTROL("adminControlLevel"),
-    MODERATOR_CONTROL("moderatorControlLevel"),
-    BAN_CONTROL("banControlLevel");
+    ADMIN_MAIN("adminMainLevel"),
+    ADMIN_CHANNEL("adminChannelLevel"),
+    ADMIN_USER("adminUserLevel"),
+    ADMIN_CONTROL_ADMIN("adminControlAdminLevel"),
+    ADMIN_CONTROL_MODERATOR("adminControlModeratorLevel"),
+    ADMIN_CONTROL_BAN("adminControlBanLevel");
 
     private final String name;
 

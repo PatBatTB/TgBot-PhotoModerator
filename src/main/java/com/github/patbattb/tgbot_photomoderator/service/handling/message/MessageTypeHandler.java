@@ -1,6 +1,7 @@
 package com.github.patbattb.tgbot_photomoderator.service.handling.message;
 
 import com.github.patbattb.tgbot_photomoderator.component.MethodContainer;
+import com.github.patbattb.tgbot_photomoderator.service.handling.Executable;
 import lombok.experimental.UtilityClass;
 import org.telegram.telegrambots.meta.api.objects.Message;
 
@@ -11,11 +12,11 @@ public class MessageTypeHandler {
 
     private final String COMMAND_PATTERN = "/";
 
-    private final Map<MessageType, MessageTypeExecutor> MESSAGE_TYPE_EXECUTOR_MAP = Map.of(
-            MessageType.TEXT, new MessageTypeExecutorText(),
-            MessageType.COMMAND, new MessageTypeExecutorCommand()
+    private final Map<MessageType, Executable> MESSAGE_TYPE_EXECUTOR_MAP = Map.of(
+            MessageType.TEXT, MessageTypeExecutor::text,
+            MessageType.COMMAND, MessageTypeExecutor::command
     );
-    private final MessageTypeExecutor MESSAGE_TYPE_EXECUTOR_DEFAULT = new MessageTypeExecutorDefault();
+    private final Executable MESSAGE_TYPE_EXECUTOR_DEFAULT = MessageTypeExecutor::unknown;
 
     public void process(MethodContainer methodContainer) {
         MESSAGE_TYPE_EXECUTOR_MAP.getOrDefault(parseMessageType(methodContainer), MESSAGE_TYPE_EXECUTOR_DEFAULT)

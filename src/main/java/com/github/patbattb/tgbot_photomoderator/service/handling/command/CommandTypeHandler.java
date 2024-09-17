@@ -2,6 +2,7 @@ package com.github.patbattb.tgbot_photomoderator.service.handling.command;
 
 import com.github.patbattb.tgbot_photomoderator.component.Command;
 import com.github.patbattb.tgbot_photomoderator.component.MethodContainer;
+import com.github.patbattb.tgbot_photomoderator.service.handling.Executable;
 import lombok.experimental.UtilityClass;
 
 import java.util.Map;
@@ -11,15 +12,15 @@ public class CommandTypeHandler {
 
     private final String ERROR = "error";
 
-    private final Map<String, CommandTypeExecutor> COMMAND_TYPE_EXECUTOR_MAP = Map.of(
-            Command.RUN.getName(), new CommandTypeExecutorRun(),
-            Command.STOP.getName(), new CommandTypeExecutorStop(),
-            Command.ADMIN_PANEL.getName(), new CommandTypeExecutorAdminPanel(),
-            Command.LEAVE.getName(), new CommandTypeExecutorLeave(),
-            ERROR, new CommandTypeExecutorError()
+    private final Map<String, Executable> COMMAND_TYPE_EXECUTOR_MAP = Map.of(
+            Command.RUN.getName(), CommandTypeExecutor::run,
+            Command.STOP.getName(), CommandTypeExecutor::stop,
+            Command.ADMIN_PANEL.getName(), CommandTypeExecutor::adminPanel,
+            Command.LEAVE.getName(), CommandTypeExecutor::leave,
+            ERROR, CommandTypeExecutor::error
 
     );
-    private final CommandTypeExecutor COMMAND_TYPE_EXECUTOR_DEFAULT = new CommandTypeExecutorDefault();
+    private final Executable COMMAND_TYPE_EXECUTOR_DEFAULT = CommandTypeExecutor::unknown;
 
     public void process(MethodContainer methodContainer) {
         COMMAND_TYPE_EXECUTOR_MAP.getOrDefault(getVerifiedCommandName(methodContainer), COMMAND_TYPE_EXECUTOR_DEFAULT)
