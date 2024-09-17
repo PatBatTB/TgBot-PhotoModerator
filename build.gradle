@@ -61,3 +61,16 @@ tasks.register('copyProps') {
         into 'build/libs/props'
     }
 }
+
+tasks.register('checkVersionUpdate') {
+    group 'verification'
+    def versionFile = file 'latestVersion.txt'
+    if (!versionFile.exists()) {
+        versionFile.write(version)
+        }
+    def latestVersion = versionFile.text.trim()
+    if (latestVersion == version) {
+        throw new GradleException ('Version of program in the \"build.gradle\" has not been updated.')
+    }
+    versionFile.write(version)
+}
