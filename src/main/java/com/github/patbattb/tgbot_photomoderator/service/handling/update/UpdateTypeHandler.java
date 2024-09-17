@@ -1,10 +1,6 @@
 package com.github.patbattb.tgbot_photomoderator.service.handling.update;
 
 import com.github.patbattb.tgbot_photomoderator.component.MethodContainer;
-import com.github.patbattb.tgbot_photomoderator.service.handling.update.executor.UpdateTypeExecutor;
-import com.github.patbattb.tgbot_photomoderator.service.handling.update.executor.UpdateTypeExecutorDefault;
-import com.github.patbattb.tgbot_photomoderator.service.handling.update.executor.UpdateTypeExecutorMessage;
-import com.github.patbattb.tgbot_photomoderator.service.handling.update.executor.UpdateTypeExecutorQuery;
 import lombok.experimental.UtilityClass;
 
 import java.util.Map;
