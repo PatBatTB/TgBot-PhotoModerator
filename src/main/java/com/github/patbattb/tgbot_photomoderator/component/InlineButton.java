@@ -6,6 +6,7 @@ import lombok.Getter;
 public enum InlineButton {
     CHANNEL("channelButton", "Канал"),
     SET_CHANNEL("setChannelButton", "Указать канал"),
+    REMOVE_CHANNEL("removeChannelButton", "Удалить канал"),
     USER("userButton","Пользователи"),
     ADMIN("adminButton","Администраторы"),
     MODERATOR("moderatorButton", "Модераторы"),

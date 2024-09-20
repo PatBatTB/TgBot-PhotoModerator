@@ -31,10 +31,15 @@ public class KeyboardMarkupProvider {
     }
 
     public InlineKeyboardMarkup getAdminChannelKeyboardMarkup(String level) {
-        var setChannelButton = getButton(level, InlineButton.SET_CHANNEL);
-        var returnButton = getButton(level, InlineButton.RETURN);
-        var rowOne = List.of(setChannelButton, returnButton);
-        return new InlineKeyboardMarkup(List.of(rowOne));
+        return new InlineKeyboardMarkup(List.of(
+                List.of(
+                        getButton(level, InlineButton.SET_CHANNEL),
+                        getButton(level, InlineButton.REMOVE_CHANNEL)
+                        ),
+                List.of(
+                        getButton(level, InlineButton.RETURN)
+                )
+                ));
     }
 
     public InlineKeyboardMarkup getAdminControlUserKeyboardMarkup(String level) {

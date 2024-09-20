@@ -3,11 +3,8 @@ import com.github.patbattb.tgbot_photomoderator.service.handling.method.MethodHa
 import lombok.EqualsAndHashCode;
 import lombok.Value;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
-import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
 import org.telegram.telegrambots.meta.api.objects.Update;
-import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
-import java.util.List;
 
 @Value
 @EqualsAndHashCode(callSuper=true)
@@ -23,14 +20,7 @@ public class TgBot extends TelegramLongPollingBot {
 
     @Override
     public void onUpdateReceived(Update update) {
-        List <BotApiMethod<?>> methodList = MethodHandler.process(new MethodContainer(update));
-        try {
-            for (BotApiMethod<?> method: methodList) {
-                execute(method);
-            }
-        } catch (TelegramApiException e) {
-            throw new RuntimeException(e);
-        }
+        MethodHandler.process(new MethodContainer(update, this));
     }
 
     @Override
