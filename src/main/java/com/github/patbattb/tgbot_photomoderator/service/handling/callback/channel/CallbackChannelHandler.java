@@ -12,7 +12,8 @@ public class CallbackChannelHandler {
 
     private final Map<String, Executable> callbackChannelExecutorMap = Map.of(
             InlineButton.SET_CHANNEL.getData(), CallbackChannelExecutor::setChannel,
-            InlineButton.RETURN.getData(), CallbackChannelExecutor::returning
+            InlineButton.RETURN.getData(), CallbackChannelExecutor::returning,
+            InlineButton.REMOVE_CHANNEL.getData(), CallbackChannelExecutor::removeChannel
     );
     private final Executable callbackChannelExecutorDefault = CallbackChannelExecutor::unknown;
 

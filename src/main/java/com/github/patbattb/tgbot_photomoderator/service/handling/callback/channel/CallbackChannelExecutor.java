@@ -18,6 +18,12 @@ public class CallbackChannelExecutor {
         methodContainer.getMethodList().add(new SendMessage(methodContainer.getChatId(), "CallbackChannelExecutor - setChannel"));
     }
 
+    public void removeChannel(MethodContainer methodContainer) {
+        //TODO
+        //mock
+        methodContainer.getMethodList().add(new SendMessage(methodContainer.getChatId(), "CallbackChannelExecutor - removeChannel"));
+    }
+
     public void returning(MethodContainer methodContainer) {
         EditMessageText editMessage = EditMessageText.builder()
                 .text(AdminPanelTitle.ADMIN_MAIN_TITLE)
@@ -28,6 +34,7 @@ public class CallbackChannelExecutor {
                 .build();
         methodContainer.getMethodList().add(editMessage);
     }
+
 
     public void unknown(MethodContainer methodContainer) {
         //TODO

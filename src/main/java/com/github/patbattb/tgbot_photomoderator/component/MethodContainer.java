@@ -4,6 +4,7 @@ import com.github.patbattb.tgbot_photomoderator.service.handling.callback.CallBa
 import com.github.patbattb.tgbot_photomoderator.service.handling.update.UpdateType;
 import lombok.Data;
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
+import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
 import java.util.ArrayList;
@@ -19,22 +20,30 @@ public final class MethodContainer {
     private final CallBackData callbackData;
     private final Integer messageId;
     private final UserGroup userGroup;
+    private final String chatType;
+    private final TgBot bot;
+    private final Message message;
 
-    public MethodContainer(Update update) {
+    public MethodContainer(Update update, TgBot bot) {
+        this.bot = bot;
         this.update = update;
         this.methodList = new ArrayList<>();
         if (update.hasMessage()) {
             this.type = UpdateType.MESSAGE;
-            this.chatId = update.getMessage().getChatId().toString();
-            this.userName = update.getMessage().getChat().getUserName();
+            this.message = update.getMessage();
+            this.chatId = this.message.getChatId().toString();
+            this.userName = this.message.getChat().getUserName();
             this.callbackData = null;
-            this.messageId = update.getMessage().getMessageId();
+            this.messageId = this.message.getMessageId();
+            this.chatType = this.message.getChat().getType();
         } else if (update.hasCallbackQuery()) {
+            this.message = (Message) update.getCallbackQuery().getMessage();
             this.type = UpdateType.CALLBACK_QUERY;
-            this.chatId = update.getCallbackQuery().getMessage().getChatId().toString();
-            this.userName = update.getCallbackQuery().getFrom().getUserName();
+            this.chatId = message.getChatId().toString();
+            this.userName = message.getChat().getUserName();
             this.callbackData = CallBackParser.parse(update.getCallbackQuery().getData());
-            this.messageId = update.getCallbackQuery().getMessage().getMessageId();
+            this.messageId = message.getMessageId();
+            this.chatType = message.getChat().getType();
         } else {
             throw new RuntimeException("Unknown message type");
         }

@@ -19,7 +19,7 @@ public final class Props {
         }
 
         public static class Container {
-                @SuppressWarnings("FieldMayBeFinal")
+                @SuppressWarnings("FieldMayBeFinal") //Makes not final for GSON lib
                 private static Map<UserGroup, Set<String>> users;
                 @Getter
                 @Setter
