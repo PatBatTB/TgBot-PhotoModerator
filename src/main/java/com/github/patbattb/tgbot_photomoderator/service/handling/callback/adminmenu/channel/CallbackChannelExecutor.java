@@ -1,4 +1,4 @@
-package com.github.patbattb.tgbot_photomoderator.service.handling.callback.channel;
+package com.github.patbattb.tgbot_photomoderator.service.handling.callback.adminmenu.channel;
 
 import com.github.patbattb.tgbot_photomoderator.component.AdminPanelTitle;
 import com.github.patbattb.tgbot_photomoderator.component.InlineLevel;

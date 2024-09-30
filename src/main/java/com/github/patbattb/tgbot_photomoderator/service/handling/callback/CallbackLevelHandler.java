@@ -15,12 +15,13 @@ public class CallbackLevelHandler {
             InlineLevel.ADMIN_CHANNEL.getName(), CallbackLevelExecutor::channel,
             InlineLevel.ADMIN_CONTROL_ADMIN.getName(), CallbackLevelExecutor::controlAdmin,
             InlineLevel.ADMIN_CONTROL_MODERATOR.getName(), CallbackLevelExecutor::controlModerator,
-            InlineLevel.ADMIN_CONTROL_BAN.getName(), CallbackLevelExecutor::controlBan
+            InlineLevel.ADMIN_CONTROL_BAN.getName(), CallbackLevelExecutor::controlBan,
+            InlineLevel.ADD_USER_TO_ADMIN.getName(), CallbackLevelExecutor::addAdmin
     );
     private final Executable CALLBACK_LEVEL_EXECUTOR_DEFAULT = CallbackLevelExecutor::unknown;
 
     public void process(MethodContainer methodContainer) {
-        callbackTypeExecutorMap.getOrDefault(methodContainer.getCallbackData().LEVEL(), CALLBACK_LEVEL_EXECUTOR_DEFAULT)
+        callbackTypeExecutorMap.getOrDefault(methodContainer.getCallbackData().level(), CALLBACK_LEVEL_EXECUTOR_DEFAULT)
                 .execute(methodContainer);
     }
 }

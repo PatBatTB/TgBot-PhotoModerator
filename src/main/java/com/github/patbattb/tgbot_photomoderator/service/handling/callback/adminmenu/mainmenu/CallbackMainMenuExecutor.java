@@ -1,4 +1,4 @@
-package com.github.patbattb.tgbot_photomoderator.service.handling.callback.admin;
+package com.github.patbattb.tgbot_photomoderator.service.handling.callback.adminmenu.mainmenu;
 
 import com.github.patbattb.tgbot_photomoderator.component.AdminPanelTitle;
 import com.github.patbattb.tgbot_photomoderator.component.InlineLevel;
@@ -10,7 +10,7 @@ import org.telegram.telegrambots.meta.api.methods.updatingmessages.DeleteMessage
 import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageText;
 
 @UtilityClass
-public class CallbackAdminExecutor {
+public class CallbackMainMenuExecutor {
     public void user(MethodContainer methodContainer) {
         EditMessageText editMessage = EditMessageText.builder()
                 .text(AdminPanelTitle.ADMIN_USER_TITLE)

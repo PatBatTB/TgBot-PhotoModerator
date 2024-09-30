@@ -1,4 +1,4 @@
-package com.github.patbattb.tgbot_photomoderator.service.handling.callback.channel;
+package com.github.patbattb.tgbot_photomoderator.service.handling.callback.adminmenu.channel;
 
 import com.github.patbattb.tgbot_photomoderator.component.InlineButton;
 import com.github.patbattb.tgbot_photomoderator.component.MethodContainer;
@@ -18,7 +18,7 @@ public class CallbackChannelHandler {
     private final Executable callbackChannelExecutorDefault = CallbackChannelExecutor::unknown;
 
     public static void process(MethodContainer methodContainer) {
-        callbackChannelExecutorMap.getOrDefault(methodContainer.getCallbackData().BUTTON(), callbackChannelExecutorDefault)
+        callbackChannelExecutorMap.getOrDefault(methodContainer.getCallbackData().button(), callbackChannelExecutorDefault)
                 .execute(methodContainer);
     }
 }

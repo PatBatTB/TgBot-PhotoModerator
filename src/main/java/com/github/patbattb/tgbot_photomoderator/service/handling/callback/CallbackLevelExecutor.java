@@ -1,12 +1,13 @@
 package com.github.patbattb.tgbot_photomoderator.service.handling.callback;
 
 import com.github.patbattb.tgbot_photomoderator.component.MethodContainer;
-import com.github.patbattb.tgbot_photomoderator.service.handling.callback.admin.CallbackAdminHandler;
-import com.github.patbattb.tgbot_photomoderator.service.handling.callback.channel.CallbackChannelHandler;
-import com.github.patbattb.tgbot_photomoderator.service.handling.callback.controluser.CallbackControlAdminHandler;
-import com.github.patbattb.tgbot_photomoderator.service.handling.callback.controluser.CallbackControlBanHandler;
-import com.github.patbattb.tgbot_photomoderator.service.handling.callback.controluser.CallbackControlModeratorHandler;
-import com.github.patbattb.tgbot_photomoderator.service.handling.callback.user.CallbackUserHandler;
+import com.github.patbattb.tgbot_photomoderator.service.handling.callback.addadmin.CallbackAddAdminHandler;
+import com.github.patbattb.tgbot_photomoderator.service.handling.callback.adminmenu.mainmenu.CallbackMainMenuHandler;
+import com.github.patbattb.tgbot_photomoderator.service.handling.callback.adminmenu.channel.CallbackChannelHandler;
+import com.github.patbattb.tgbot_photomoderator.service.handling.callback.adminmenu.controluser.CallbackControlAdminHandler;
+import com.github.patbattb.tgbot_photomoderator.service.handling.callback.adminmenu.controluser.CallbackControlBanHandler;
+import com.github.patbattb.tgbot_photomoderator.service.handling.callback.adminmenu.controluser.CallbackControlModeratorHandler;
+import com.github.patbattb.tgbot_photomoderator.service.handling.callback.adminmenu.user.CallbackUserHandler;
 import lombok.experimental.UtilityClass;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 
@@ -14,7 +15,7 @@ import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 public class CallbackLevelExecutor {
 
     public void admin(MethodContainer methodContainer) {
-        CallbackAdminHandler.process(methodContainer);
+        CallbackMainMenuHandler.process(methodContainer);
     }
 
     public void user(MethodContainer methodContainer) {
@@ -35,6 +36,10 @@ public class CallbackLevelExecutor {
 
     public void controlBan(MethodContainer methodContainer) {
         CallbackControlBanHandler.process(methodContainer);
+    }
+
+    public static void addAdmin(MethodContainer methodContainer) {
+        CallbackAddAdminHandler.process(methodContainer);
     }
 
     public void unknown(MethodContainer methodContainer) {

@@ -1,6 +1,7 @@
 package com.github.patbattb.tgbot_photomoderator.service.handling.method;
 
 import com.github.patbattb.tgbot_photomoderator.component.MethodContainer;
+import com.github.patbattb.tgbot_photomoderator.component.DataContainer;
 import com.github.patbattb.tgbot_photomoderator.service.handling.chat.ChatTypeHandler;
 import com.github.patbattb.tgbot_photomoderator.service.menu.MenuProvider;
 import lombok.experimental.UtilityClass;
@@ -14,9 +15,10 @@ public class MethodHandler {
     public void process(MethodContainer methodContainer) {
         methodContainer.getMethodList().add(MenuProvider.getGroupMenu(methodContainer));
         log.debug("{}[{}]({})\n",
-                methodContainer.getUserName(),
-                methodContainer.getChatId(),
+                methodContainer.getUser().userName(),
+                methodContainer.getUser().id(),
                 methodContainer.getType());
+        DataContainer.Container.addUserToList(methodContainer.getUser());
         ChatTypeHandler.process(methodContainer);
         try {
             for (BotApiMethod<?> method: methodContainer.getMethodList()) {

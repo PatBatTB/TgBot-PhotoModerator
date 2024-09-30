@@ -1,4 +1,4 @@
-package com.github.patbattb.tgbot_photomoderator.service.handling.callback.controluser;
+package com.github.patbattb.tgbot_photomoderator.service.handling.callback.adminmenu.controluser;
 
 import com.github.patbattb.tgbot_photomoderator.component.InlineButton;
 import com.github.patbattb.tgbot_photomoderator.component.MethodContainer;
@@ -17,7 +17,7 @@ public class CallbackControlAdminHandler {
     private final Executable callbackControlAdminExecutorDefault = CallbackControlAdminExecutor::unknown;
 
     public void process(MethodContainer methodContainer) {
-        callbackControlAdminMap.getOrDefault(methodContainer.getCallbackData().BUTTON(), callbackControlAdminExecutorDefault)
+        callbackControlAdminMap.getOrDefault(methodContainer.getCallbackData().button(), callbackControlAdminExecutorDefault)
                 .execute(methodContainer);
     }
 }

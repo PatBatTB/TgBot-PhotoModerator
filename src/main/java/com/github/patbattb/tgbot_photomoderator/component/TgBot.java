@@ -15,7 +15,7 @@ public class TgBot extends TelegramLongPollingBot {
     public TgBot (String botUsername, String botToken) {
         super(botToken);
         this.botUsername = botUsername;
-        Props.init();
+        DataContainer.init();
     }
 
     @Override

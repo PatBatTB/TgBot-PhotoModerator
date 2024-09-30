@@ -1,6 +1,6 @@
 package com.github.patbattb.tgbot_photomoderator.service.json;
 
-import com.github.patbattb.tgbot_photomoderator.component.Props;
+import com.github.patbattb.tgbot_photomoderator.component.DataContainer;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import lombok.experimental.UtilityClass;
@@ -31,7 +31,7 @@ public class JsonHandler {
         }
         if (!Files.exists(JSON_PATH)) saveData();
         try(Reader reader = Files.newBufferedReader(JSON_PATH)) {
-            Props.container = GSON.fromJson(reader, Props.Container.class);
+            DataContainer.setContainer(GSON.fromJson(reader, DataContainer.Container.class));
         } catch(IOException e) {
             throw new RuntimeException(e);
         }
@@ -39,7 +39,7 @@ public class JsonHandler {
 
     public void saveData() {
         try(Writer writer = Files.newBufferedWriter(JSON_PATH)) {
-            GSON.toJson(Props.container, writer);
+            GSON.toJson(DataContainer.getContainer(), writer);
         } catch(IOException e) {
             throw new RuntimeException(e);
         }

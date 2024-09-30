@@ -9,7 +9,8 @@ public enum InlineLevel {
     ADMIN_USER("adminUserLevel"),
     ADMIN_CONTROL_ADMIN("adminControlAdminLevel"),
     ADMIN_CONTROL_MODERATOR("adminControlModeratorLevel"),
-    ADMIN_CONTROL_BAN("adminControlBanLevel");
+    ADMIN_CONTROL_BAN("adminControlBanLevel"),
+    ADD_USER_TO_ADMIN("addUserToAdmin");
 
     private final String name;
 

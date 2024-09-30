@@ -14,7 +14,9 @@ public enum InlineButton {
     ADD("addButton","Добавить"),
     REMOVE("RemoveButton","Удалить"),
     RETURN("returnButton","Назад"),
-    CLOSE("closeButton", "Закрыть");
+    CLOSE("closeButton", "Закрыть"),
+    YES("yesButton", "Да"),
+    NO("noButton", "Нет");
 
     private final String data;
     private final String text;

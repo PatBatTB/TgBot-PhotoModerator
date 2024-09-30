@@ -1,4 +1,4 @@
-package com.github.patbattb.tgbot_photomoderator.service.handling.callback.controluser;
+package com.github.patbattb.tgbot_photomoderator.service.handling.callback.adminmenu.controluser;
 
 import com.github.patbattb.tgbot_photomoderator.component.AdminPanelTitle;
 import com.github.patbattb.tgbot_photomoderator.component.InlineLevel;
@@ -9,17 +9,18 @@ import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageText;
 
 @UtilityClass
-public class CallbackControlBanExecutor {
+public class CallbackControlModeratorExecutor {
+
     public void add(MethodContainer methodContainer) {
         //TODO
         //mock
-        methodContainer.getMethodList().add(new SendMessage(methodContainer.getChatId(), "CallbackControlBanExecutor - add"));
+        methodContainer.getMethodList().add(new SendMessage(methodContainer.getChatId(), "CallbackControlModeratorExecutor - add"));
     }
 
     public void remove(MethodContainer methodContainer) {
         //TODO
         //mock
-        methodContainer.getMethodList().add(new SendMessage(methodContainer.getChatId(), "CallbackControlBanExecutor - remove"));
+        methodContainer.getMethodList().add(new SendMessage(methodContainer.getChatId(), "CallbackControlModeratorExecutor - remove"));
     }
 
     public void returning(MethodContainer methodContainer) {
@@ -35,6 +36,6 @@ public class CallbackControlBanExecutor {
     public void unknown(MethodContainer methodContainer) {
         //TODO
         //mock
-        methodContainer.getMethodList().add(new SendMessage(methodContainer.getChatId(), "CallbackControlBanExecutor - unknown"));
+        methodContainer.getMethodList().add(new SendMessage(methodContainer.getChatId(), "CallbackControlModeratorExecutor - unknown"));
     }
 }

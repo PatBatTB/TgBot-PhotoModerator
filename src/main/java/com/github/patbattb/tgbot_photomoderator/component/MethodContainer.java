@@ -15,7 +15,7 @@ public final class MethodContainer {
     private final UpdateType type;
     private final Update update;
     private final String chatId;
-    private final String userName;
+    private final User user;
     private final List<BotApiMethod<?>> methodList;
     private final CallBackData callbackData;
     private final Integer messageId;
@@ -32,7 +32,11 @@ public final class MethodContainer {
             this.type = UpdateType.MESSAGE;
             this.message = update.getMessage();
             this.chatId = this.message.getChatId().toString();
-            this.userName = this.message.getChat().getUserName();
+            this.user = new User(message.getFrom().getId().toString(),
+                    message.getFrom().getFirstName(),
+                    message.getFrom().getLastName(),
+                    message.getFrom().getUserName(),
+                    DataContainer.Container.getUserChatState(this.chatId));
             this.callbackData = null;
             this.messageId = this.message.getMessageId();
             this.chatType = this.message.getChat().getType();
@@ -40,13 +44,17 @@ public final class MethodContainer {
             this.message = (Message) update.getCallbackQuery().getMessage();
             this.type = UpdateType.CALLBACK_QUERY;
             this.chatId = message.getChatId().toString();
-            this.userName = message.getChat().getUserName();
+            this.user = new User(update.getCallbackQuery().getFrom().getId().toString(),
+                    update.getCallbackQuery().getFrom().getFirstName(),
+                    update.getCallbackQuery().getFrom().getLastName(),
+                    update.getCallbackQuery().getFrom().getUserName(),
+                    DataContainer.Container.getUserChatState(this.chatId));
             this.callbackData = CallBackParser.parse(update.getCallbackQuery().getData());
             this.messageId = message.getMessageId();
             this.chatType = message.getChat().getType();
         } else {
             throw new RuntimeException("Unknown message type");
         }
-        this.userGroup = Props.Container.getUserGroup(this.chatId);
+        this.userGroup = DataContainer.Container.getUserGroupMap(this.chatId);
     }
 }

@@ -12,43 +12,43 @@ import java.util.List;
 public class KeyboardMarkupProvider {
 
     public InlineKeyboardMarkup getAdminMainKeyboardMarkup(String level) {
-        var channelButton = getButton(level, InlineButton.CHANNEL);
-        var userButton = getButton(level, InlineButton.USER);
-        var rowOne = List.of(channelButton, userButton);
-        var closeButton = getButton(level, InlineButton.CLOSE);
-        var rowTwo = List.of(closeButton);
-        return new InlineKeyboardMarkup(List.of(rowOne, rowTwo));
+        return new InlineKeyboardMarkup(List.of(
+                List.of(getButton(level, InlineButton.CHANNEL),
+                        getButton(level, InlineButton.USER)),
+                List.of(getButton(level, InlineButton.CLOSE))
+        ));
     }
 
     public InlineKeyboardMarkup getAdminUserKeyboardMarkup(String level) {
-        var adminButton = getButton(level, InlineButton.ADMIN);
-        var moderatorButton = getButton(level, InlineButton.MODERATOR);
-        var banButton = getButton(level, InlineButton.BAN);
-        var returnButton = getButton(level, InlineButton.RETURN);
-        var rowOne = List.of(adminButton, moderatorButton);
-        var rowTwo = List.of(banButton, returnButton);
-        return new InlineKeyboardMarkup(List.of(rowOne, rowTwo));
+        return new InlineKeyboardMarkup(List.of(
+                List.of(getButton(level, InlineButton.ADMIN),
+                        getButton(level, InlineButton.MODERATOR)),
+                List.of(getButton(level, InlineButton.BAN),
+                        getButton(level, InlineButton.RETURN))
+        ));
     }
 
     public InlineKeyboardMarkup getAdminChannelKeyboardMarkup(String level) {
         return new InlineKeyboardMarkup(List.of(
-                List.of(
-                        getButton(level, InlineButton.SET_CHANNEL),
-                        getButton(level, InlineButton.REMOVE_CHANNEL)
-                        ),
-                List.of(
-                        getButton(level, InlineButton.RETURN)
-                )
-                ));
+                List.of(getButton(level, InlineButton.SET_CHANNEL),
+                        getButton(level, InlineButton.REMOVE_CHANNEL)),
+                List.of(getButton(level, InlineButton.RETURN))
+        ));
+    }
+
+    public InlineKeyboardMarkup getYesNoKeyboardMarkup(String level) {
+        return new InlineKeyboardMarkup(List.of(
+                List.of(getButton(level, InlineButton.YES),
+                        getButton(level, InlineButton.NO))
+        ));
     }
 
     public InlineKeyboardMarkup getAdminControlUserKeyboardMarkup(String level) {
-        var addButton = getButton(level, InlineButton.ADD);
-        var removeButton = getButton(level, InlineButton.REMOVE);
-        var returnButton = getButton(level, InlineButton.RETURN);
-        var rowOne = List.of(addButton, removeButton);
-        var rowTwo = List.of(returnButton);
-        return new InlineKeyboardMarkup(List.of(rowOne, rowTwo));
+        return new InlineKeyboardMarkup(List.of(
+                List.of(getButton(level, InlineButton.ADD),
+                        getButton(level, InlineButton.REMOVE)),
+                List.of(getButton(level, InlineButton.RETURN))
+        ));
     }
 
     private InlineKeyboardButton getButton(String level, InlineButton button) {
