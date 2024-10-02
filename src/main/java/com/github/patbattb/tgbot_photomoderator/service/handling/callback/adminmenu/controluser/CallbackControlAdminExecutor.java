@@ -12,7 +12,7 @@ public class CallbackControlAdminExecutor {
     public void add(MethodContainer methodContainer) {
         DeleteMessage delete = new DeleteMessage(methodContainer.getChatId(), methodContainer.getMessageId());
         methodContainer.getMethodList().add(delete);
-        DataContainer.Container.setUserChatState(methodContainer.getUser().id(), ChatState.ADD_ADMINISTRATOR);
+        DataContainer.Container.setChatState(methodContainer.getUser().id(), ChatState.ADD_ADMINISTRATOR);
         SendMessage message = new SendMessage(methodContainer.getChatId(), "Укажите UserName пользователя\n" +
                 "для добавления в список администраторов.");
         methodContainer.getMethodList().add(message);

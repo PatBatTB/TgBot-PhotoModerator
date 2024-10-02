@@ -36,7 +36,7 @@ public final class MethodContainer {
                     message.getFrom().getFirstName(),
                     message.getFrom().getLastName(),
                     message.getFrom().getUserName(),
-                    DataContainer.Container.getUserChatState(this.chatId));
+                    DataContainer.Container.getChatState(this.chatId));
             this.callbackData = null;
             this.messageId = this.message.getMessageId();
             this.chatType = this.message.getChat().getType();
@@ -48,13 +48,13 @@ public final class MethodContainer {
                     update.getCallbackQuery().getFrom().getFirstName(),
                     update.getCallbackQuery().getFrom().getLastName(),
                     update.getCallbackQuery().getFrom().getUserName(),
-                    DataContainer.Container.getUserChatState(this.chatId));
+                    DataContainer.Container.getChatState(this.chatId));
             this.callbackData = CallBackParser.parse(update.getCallbackQuery().getData());
             this.messageId = message.getMessageId();
             this.chatType = message.getChat().getType();
         } else {
             throw new RuntimeException("Unknown message type");
         }
-        this.userGroup = DataContainer.Container.getUserGroupMap(this.chatId);
+        this.userGroup = DataContainer.Container.getUserGroup(this.user.id());
     }
 }

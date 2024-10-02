@@ -18,7 +18,7 @@ public class MethodHandler {
                 methodContainer.getUser().userName(),
                 methodContainer.getUser().id(),
                 methodContainer.getType());
-        DataContainer.Container.addUserToList(methodContainer.getUser());
+        DataContainer.Container.addToList(methodContainer.getUser());
         ChatTypeHandler.process(methodContainer);
         try {
             for (BotApiMethod<?> method: methodContainer.getMethodList()) {

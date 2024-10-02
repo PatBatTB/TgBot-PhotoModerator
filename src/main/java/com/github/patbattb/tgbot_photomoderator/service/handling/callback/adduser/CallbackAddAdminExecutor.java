@@ -1,4 +1,4 @@
-package com.github.patbattb.tgbot_photomoderator.service.handling.callback.addadmin;
+package com.github.patbattb.tgbot_photomoderator.service.handling.callback.adduser;
 
 import com.github.patbattb.tgbot_photomoderator.component.ChatState;
 import com.github.patbattb.tgbot_photomoderator.component.DataContainer;
@@ -14,7 +14,7 @@ public class CallbackAddAdminExecutor {
         EditMessageText message = new EditMessageText("Введите UserName пользователя еще раз.");
         message.setMessageId(methodContainer.getMessageId());
         message.setChatId(methodContainer.getChatId());
-        DataContainer.Container.setUserChatState(methodContainer.getUser().id(), ChatState.ADD_ADMINISTRATOR);
+        DataContainer.Container.setChatState(methodContainer.getUser().id(), ChatState.ADD_ADMINISTRATOR);
         methodContainer.getMethodList().add(message);
     }
 

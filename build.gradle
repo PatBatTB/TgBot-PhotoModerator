@@ -4,7 +4,7 @@ plugins {
 }
 
 group = 'com.github.patbattb'
-version = '0.3.1'
+version = '0.3.2'
 def mainClass = 'com.github.patbattb.tgbot_photomoderator.App'
 def vendorName = 'PatBatTB'
 
@@ -33,7 +33,9 @@ dependencies {
 }
 
 test {
-    useJUnitPlatform()
+    useJUnitPlatform {
+        excludeTags("VersionCheck")
+    }
 }
 
 jar {
@@ -63,15 +65,19 @@ tasks.register('copyProps') {
     }
 }
 
-tasks.register('checkVersionUpdate') {
+tasks.register('checkVersion', Test) {
     group 'verification'
     def versionFile = file 'latestVersion.txt'
-    if (!versionFile.exists()) {
-        versionFile.write(version)
-        }
-    def latestVersion = versionFile.text.trim()
-    if (latestVersion == version) {
-        throw new GradleException ('Version of program in the \"build.gradle\" has not been updated.')
+    if (!versionFile.exists()) versionFile.write(version)
+    systemProperty('latestVersion', versionFile.text.trim())
+    systemProperty('currentVersion', version)
+    useJUnitPlatform {
+        includeTags("VersionCheck")
     }
+    finalizedBy 'latestVersionUpdate'
+}
+
+tasks.register('latestVersionUpdate') {
+    def versionFile = file 'latestVersion.txt'
     versionFile.write(version)
 }

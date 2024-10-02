@@ -1,9 +1,16 @@
 package com.github.patbattb.tgbot_photomoderator.component;
 
-
 import java.util.Objects;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public record User(String id, String firstName, String lastName, String userName, ChatState state) {
+
+    public static String trimUserName(String userName) {
+        Pattern pattern = Pattern.compile("(^[^@].+|(?<=^@).+)");
+        Matcher matcher = pattern.matcher(userName);
+        return matcher.find() ? matcher.group() : userName;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -19,10 +26,10 @@ public record User(String id, String firstName, String lastName, String userName
     }
 
     public static class Updater {
-        private String id;
-        private String firstName;
-        private String lastName;
-        private String userName;
+        private final String id;
+        private final String firstName;
+        private final String lastName;
+        private final String userName;
         private ChatState state;
 
         public Updater(User user) {
