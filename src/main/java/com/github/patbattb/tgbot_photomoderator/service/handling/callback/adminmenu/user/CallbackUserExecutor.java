@@ -16,7 +16,7 @@ public class CallbackUserExecutor {
                 .messageId(methodContainer.getMessageId())
                 .text(AdminPanelTitle.ADMIN_CONTROL_ADMIN_TITLE)
                 .replyMarkup(KeyboardMarkupProvider
-                        .getAdminControlUserKeyboardMarkup(InlineLevel.ADMIN_CONTROL_ADMIN.getName()))
+                        .getAdminControlUserKeyboardMarkup(InlineLevel.ADMIN_CONTROL_ADMIN))
                 .build();
         methodContainer.getMethodList().add(editMessageText);
     }
@@ -27,7 +27,7 @@ public class CallbackUserExecutor {
                 .messageId(methodContainer.getMessageId())
                 .text(AdminPanelTitle.ADMIN_CONTROL_MODERATOR_TITLE)
                 .replyMarkup(KeyboardMarkupProvider
-                        .getAdminControlUserKeyboardMarkup(InlineLevel.ADMIN_CONTROL_MODERATOR.getName()))
+                        .getAdminControlUserKeyboardMarkup(InlineLevel.ADMIN_CONTROL_MODERATOR))
                 .build();
         methodContainer.getMethodList().add(editMessageText);
     }
@@ -38,7 +38,7 @@ public class CallbackUserExecutor {
                 .messageId(methodContainer.getMessageId())
                 .text(AdminPanelTitle.ADMIN_CONTROL_BAN_TITLE)
                 .replyMarkup(KeyboardMarkupProvider
-                        .getAdminControlUserKeyboardMarkup(InlineLevel.ADMIN_CONTROL_BAN.getName()))
+                        .getAdminControlUserKeyboardMarkup(InlineLevel.ADMIN_CONTROL_BAN))
                 .build();
         methodContainer.getMethodList().add(editMessageText);
     }
@@ -49,7 +49,7 @@ public class CallbackUserExecutor {
                 .messageId(methodContainer.getMessageId())
                 .text(AdminPanelTitle.ADMIN_MAIN_TITLE)
                 .replyMarkup(KeyboardMarkupProvider
-                        .getAdminMainKeyboardMarkup(InlineLevel.ADMIN_MAIN.getName()))
+                        .getAdminMainKeyboardMarkup(InlineLevel.ADMIN_MAIN))
                 .build();
         methodContainer.getMethodList().add(editMessageText);
     }

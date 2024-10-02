@@ -13,7 +13,7 @@ public class CommandTypeExecutor {
     public void adminPanel(MethodContainer methodContainer) {
         SendMessage sendMessage = new SendMessage(methodContainer.getChatId(), AdminPanelTitle.ADMIN_MAIN_TITLE);
         sendMessage.setReplyMarkup(KeyboardMarkupProvider
-                .getAdminMainKeyboardMarkup(InlineLevel.ADMIN_MAIN.getName()));
+                .getAdminMainKeyboardMarkup(InlineLevel.ADMIN_MAIN));
         methodContainer.getMethodList().add(sendMessage);
     }
 

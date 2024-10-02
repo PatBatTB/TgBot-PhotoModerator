@@ -4,7 +4,7 @@ plugins {
 }
 
 group = 'com.github.patbattb'
-version = '0.3.2'
+version = '0.3.3'
 def mainClass = 'com.github.patbattb.tgbot_photomoderator.App'
 def vendorName = 'PatBatTB'
 
@@ -24,7 +24,6 @@ repositories {
 dependencies {
     implementation 'com.google.code.gson:gson:2.11.0'
     implementation 'org.telegram:telegrambots:6.9.7.1'
-    implementation 'org.telegram:telegrambotsextensions:6.9.7.1'
     implementation 'ch.qos.logback:logback-classic:1.5.8'
     testImplementation platform('org.junit:junit-bom:5.10.0')
     testImplementation 'org.junit.jupiter:junit-jupiter'

@@ -1,13 +1,15 @@
 package com.github.patbattb.tgbot_photomoderator.service.handling.callback;
 
 import com.github.patbattb.tgbot_photomoderator.component.MethodContainer;
-import com.github.patbattb.tgbot_photomoderator.service.handling.callback.adduser.CallbackAddAdminHandler;
+import com.github.patbattb.tgbot_photomoderator.service.handling.callback.replymenu.CallbackAddAdminHandler;
+import com.github.patbattb.tgbot_photomoderator.service.handling.callback.replymenu.CallbackAddModeratorHandler;
 import com.github.patbattb.tgbot_photomoderator.service.handling.callback.adminmenu.mainmenu.CallbackMainMenuHandler;
 import com.github.patbattb.tgbot_photomoderator.service.handling.callback.adminmenu.channel.CallbackChannelHandler;
 import com.github.patbattb.tgbot_photomoderator.service.handling.callback.adminmenu.controluser.CallbackControlAdminHandler;
 import com.github.patbattb.tgbot_photomoderator.service.handling.callback.adminmenu.controluser.CallbackControlBanHandler;
 import com.github.patbattb.tgbot_photomoderator.service.handling.callback.adminmenu.controluser.CallbackControlModeratorHandler;
 import com.github.patbattb.tgbot_photomoderator.service.handling.callback.adminmenu.user.CallbackUserHandler;
+import com.github.patbattb.tgbot_photomoderator.service.handling.callback.replymenu.CallbackDelAdminHandler;
 import lombok.experimental.UtilityClass;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 
@@ -42,7 +44,16 @@ public class CallbackLevelExecutor {
         CallbackAddAdminHandler.process(methodContainer);
     }
 
+    public static void addModerator(MethodContainer methodContainer) {
+        CallbackAddModeratorHandler.process(methodContainer);
+    }
+
+    public static void removeAdmin(MethodContainer methodContainer) {
+        CallbackDelAdminHandler.process(methodContainer);
+    }
+
     public void unknown(MethodContainer methodContainer) {
+        //TODO
         methodContainer.getMethodList().add(new SendMessage(methodContainer.getChatId(), "CallbackLevelExecutor - unknown"));
     }
 }

@@ -17,7 +17,7 @@ public class CallbackMainMenuExecutor {
                 .chatId(methodContainer.getChatId())
                 .messageId(methodContainer.getMessageId())
                 .replyMarkup(KeyboardMarkupProvider
-                        .getAdminUserKeyboardMarkup(InlineLevel.ADMIN_USER.getName()))
+                        .getAdminUserKeyboardMarkup(InlineLevel.ADMIN_USER))
                 .build();
         methodContainer.getMethodList().add(editMessage);
     }
@@ -28,7 +28,7 @@ public class CallbackMainMenuExecutor {
                 .chatId(methodContainer.getChatId())
                 .messageId(methodContainer.getMessageId())
                 .replyMarkup(KeyboardMarkupProvider.
-                        getAdminChannelKeyboardMarkup(InlineLevel.ADMIN_CHANNEL.getName()))
+                        getAdminChannelKeyboardMarkup(InlineLevel.ADMIN_CHANNEL))
                 .build();
         methodContainer.getMethodList().add(editMessage);
     }

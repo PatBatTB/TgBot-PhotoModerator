@@ -1,6 +1,7 @@
 package com.github.patbattb.tgbot_photomoderator.service.markup;
 
 import com.github.patbattb.tgbot_photomoderator.component.InlineButton;
+import com.github.patbattb.tgbot_photomoderator.component.InlineLevel;
 import com.github.patbattb.tgbot_photomoderator.service.handling.callback.CallBackParser;
 import lombok.experimental.UtilityClass;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
@@ -11,7 +12,7 @@ import java.util.List;
 @UtilityClass
 public class KeyboardMarkupProvider {
 
-    public InlineKeyboardMarkup getAdminMainKeyboardMarkup(String level) {
+    public InlineKeyboardMarkup getAdminMainKeyboardMarkup(InlineLevel level) {
         return new InlineKeyboardMarkup(List.of(
                 List.of(getButton(level, InlineButton.CHANNEL),
                         getButton(level, InlineButton.USER)),
@@ -19,7 +20,7 @@ public class KeyboardMarkupProvider {
         ));
     }
 
-    public InlineKeyboardMarkup getAdminUserKeyboardMarkup(String level) {
+    public InlineKeyboardMarkup getAdminUserKeyboardMarkup(InlineLevel level) {
         return new InlineKeyboardMarkup(List.of(
                 List.of(getButton(level, InlineButton.ADMIN),
                         getButton(level, InlineButton.MODERATOR)),
@@ -28,7 +29,7 @@ public class KeyboardMarkupProvider {
         ));
     }
 
-    public InlineKeyboardMarkup getAdminChannelKeyboardMarkup(String level) {
+    public InlineKeyboardMarkup getAdminChannelKeyboardMarkup(InlineLevel level) {
         return new InlineKeyboardMarkup(List.of(
                 List.of(getButton(level, InlineButton.SET_CHANNEL),
                         getButton(level, InlineButton.REMOVE_CHANNEL)),
@@ -36,14 +37,14 @@ public class KeyboardMarkupProvider {
         ));
     }
 
-    public InlineKeyboardMarkup getYesNoKeyboardMarkup(String level) {
+    public InlineKeyboardMarkup getYesNoKeyboardMarkup(InlineLevel level) {
         return new InlineKeyboardMarkup(List.of(
                 List.of(getButton(level, InlineButton.YES),
                         getButton(level, InlineButton.NO))
         ));
     }
 
-    public InlineKeyboardMarkup getAdminControlUserKeyboardMarkup(String level) {
+    public InlineKeyboardMarkup getAdminControlUserKeyboardMarkup(InlineLevel level) {
         return new InlineKeyboardMarkup(List.of(
                 List.of(getButton(level, InlineButton.ADD),
                         getButton(level, InlineButton.REMOVE)),
@@ -51,10 +52,10 @@ public class KeyboardMarkupProvider {
         ));
     }
 
-    private InlineKeyboardButton getButton(String level, InlineButton button) {
+    private InlineKeyboardButton getButton(InlineLevel level, InlineButton button) {
         return InlineKeyboardButton.builder()
                 .text(button.getText())
-                .callbackData(CallBackParser.build(level, button.getData()))
+                .callbackData(CallBackParser.build(level.getData(), button.getData()))
                 .build();
     }
 }

@@ -4,7 +4,7 @@ import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public record User(String id, String firstName, String lastName, String userName, ChatState state) {
+public record User(String id, String firstName, String lastName, String userName, UserState state) {
 
     public static String trimUserName(String userName) {
         Pattern pattern = Pattern.compile("(^[^@].+|(?<=^@).+)");
@@ -30,7 +30,7 @@ public record User(String id, String firstName, String lastName, String userName
         private final String firstName;
         private final String lastName;
         private final String userName;
-        private ChatState state;
+        private UserState state;
 
         public Updater(User user) {
             this.id = user.id;
@@ -40,9 +40,9 @@ public record User(String id, String firstName, String lastName, String userName
             this.state = user.state;
         }
 
-        public Updater chatState(ChatState state) {
+        public Updater userState(UserState state) {
             this.state = state;
-            return  this;
+            return this;
         }
 
         public User update() {

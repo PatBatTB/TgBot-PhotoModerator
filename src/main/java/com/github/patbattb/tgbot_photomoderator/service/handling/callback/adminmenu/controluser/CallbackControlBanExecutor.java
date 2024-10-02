@@ -27,7 +27,7 @@ public class CallbackControlBanExecutor {
                 .chatId(methodContainer.getChatId())
                 .messageId(methodContainer.getMessageId())
                 .text(AdminPanelTitle.ADMIN_USER_TITLE)
-                .replyMarkup(KeyboardMarkupProvider.getAdminUserKeyboardMarkup(InlineLevel.ADMIN_USER.getName()))
+                .replyMarkup(KeyboardMarkupProvider.getAdminUserKeyboardMarkup(InlineLevel.ADMIN_USER))
                 .build();
         methodContainer.getMethodList().add(editMessageText);
     }

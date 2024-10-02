@@ -12,16 +12,19 @@ public class CallbackControlAdminExecutor {
     public void add(MethodContainer methodContainer) {
         DeleteMessage delete = new DeleteMessage(methodContainer.getChatId(), methodContainer.getMessageId());
         methodContainer.getMethodList().add(delete);
-        DataContainer.Container.setChatState(methodContainer.getUser().id(), ChatState.ADD_ADMINISTRATOR);
+        DataContainer.Container.setChatState(methodContainer.getUser().id(), UserState.ADD_ADMINISTRATOR);
         SendMessage message = new SendMessage(methodContainer.getChatId(), "Укажите UserName пользователя\n" +
                 "для добавления в список администраторов.");
         methodContainer.getMethodList().add(message);
     }
 
     public void remove(MethodContainer methodContainer) {
-        //TODO
-        //mock
-        methodContainer.getMethodList().add(new SendMessage(methodContainer.getChatId(), "CallbackControlAdminExecutor - remove"));
+        DeleteMessage delete = new DeleteMessage(methodContainer.getChatId(), methodContainer.getMessageId());
+        methodContainer.getMethodList().add(delete);
+        DataContainer.Container.setChatState(methodContainer.getUser().id(), UserState.DEL_ADMINISTRATOR);
+        SendMessage message = new SendMessage(methodContainer.getChatId(), "Укажите UserName пользователя\n" +
+                "для удаления его из списка администраторов.");
+        methodContainer.getMethodList().add(message);
     }
 
     public void returning(MethodContainer methodContainer) {
@@ -29,7 +32,7 @@ public class CallbackControlAdminExecutor {
                 .chatId(methodContainer.getChatId())
                 .messageId(methodContainer.getMessageId())
                 .text(AdminPanelTitle.ADMIN_USER_TITLE)
-                .replyMarkup(KeyboardMarkupProvider.getAdminUserKeyboardMarkup(InlineLevel.ADMIN_USER.getName()))
+                .replyMarkup(KeyboardMarkupProvider.getAdminUserKeyboardMarkup(InlineLevel.ADMIN_USER))
                 .build();
         methodContainer.getMethodList().add(editMessageText);
     }

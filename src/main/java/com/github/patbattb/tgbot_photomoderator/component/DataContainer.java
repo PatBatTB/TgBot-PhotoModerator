@@ -57,11 +57,15 @@ public final class DataContainer {
             return optional.filter(id -> userGroupMap.get(userGroup).contains(id)).isPresent();
         }
 
-        @SuppressWarnings("unused")
-        public static boolean removeFromGroup(UserGroup userGroup, String userId) {
-            boolean result =  userGroupMap.get(userGroup).remove(userId);
-            if (result) JsonHandler.saveData();
-            return result;
+        public static boolean removeFromGroup(UserGroup userGroup, String userName) {
+            Optional<String> optional = getId(userName);
+            if (optional.isPresent()) {
+                String id = optional.get();
+                boolean result = userGroupMap.get(userGroup).remove(id);
+                if (result) JsonHandler.saveData();
+                return result;
+            }
+            return false;
         }
 
         public static boolean addToList(User user) {
@@ -71,20 +75,20 @@ public final class DataContainer {
             return result;
         }
 
-        public static ChatState getChatState(String chatId) {
-            Optional<ChatState> optional = userList.stream()
+        public static UserState getChatState(String chatId) {
+            Optional<UserState> optional = userList.stream()
                     .filter(elem -> Objects.equals(elem.id(), chatId))
                     .map(User::state)
                     .findAny();
-            return optional.orElse(ChatState.NOSTATE);
+            return optional.orElse(UserState.NO_STATE);
         }
 
         @SuppressWarnings("all")
-        public static boolean setChatState(String chatId, ChatState state) {
+        public static boolean setChatState(String chatId, UserState state) {
             Optional<User> optional = userList.stream()
                     .filter(elem -> Objects.equals(elem.id(), chatId))
                     .findAny();
-            return optional.filter(user -> addToList(new User.Updater(user).chatState(state).update())).isPresent();
+            return optional.filter(user -> addToList(new User.Updater(user).userState(state).update())).isPresent();
 
         }
 
@@ -103,5 +107,26 @@ public final class DataContainer {
                     .findAny();
         }
 
+        /**
+         * The {@code User.state} field in the {@link User} class is {@link UserState} enum, so it cannot have any value.
+         * In case of a data violation in the file, all undefined values for the {@code User.state} field
+         * are replaced by the default value {@link UserState#NO_STATE}
+         * @return {@code true} if any data has been corrected.
+         */
+        public static boolean fixIncorrectUserState() {
+            boolean result = false;
+            Iterator<User> iterator = userList.iterator();
+            Set<User> modifiedUsers = new HashSet<>();
+            while (iterator.hasNext()) {
+                User user = iterator.next();
+                if (user.state() == null) {
+                    modifiedUsers.add(new User.Updater(user).userState(UserState.NO_STATE).update());
+                    iterator.remove();
+                    result = true;
+                }
+            }
+            userList.addAll(modifiedUsers);
+            return result;
+        }
     }
 }

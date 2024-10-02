@@ -32,6 +32,7 @@ public class JsonHandler {
         if (!Files.exists(JSON_PATH)) saveData();
         try(Reader reader = Files.newBufferedReader(JSON_PATH)) {
             DataContainer.setContainer(GSON.fromJson(reader, DataContainer.Container.class));
+            if (DataContainer.Container.fixIncorrectUserState()) saveData();
         } catch(IOException e) {
             throw new RuntimeException(e);
         }

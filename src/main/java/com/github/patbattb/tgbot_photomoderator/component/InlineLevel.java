@@ -10,11 +10,13 @@ public enum InlineLevel {
     ADMIN_CONTROL_ADMIN("adminControlAdminLevel"),
     ADMIN_CONTROL_MODERATOR("adminControlModeratorLevel"),
     ADMIN_CONTROL_BAN("adminControlBanLevel"),
-    ADD_USER_TO_ADMIN("addUserToAdmin");
+    ADD_USER_TO_ADMIN_AGAIN("addUserToAdmin"),
+    ADD_USER_TO_MODERATOR_AGAIN("addUserToModerator"),
+    DEL_USER_FROM_ADMIN_AGAIN("delUserFromAdmin");
 
-    private final String name;
+    private final String data;
 
-    InlineLevel(String name) {
-        this.name = name;
+    InlineLevel(String data) {
+        this.data = data;
     }
 }

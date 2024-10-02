@@ -10,13 +10,16 @@ import java.util.Map;
 @UtilityClass
 public class CallbackLevelHandler {
     private final Map<String, Executable> callbackTypeExecutorMap = Map.of(
-            InlineLevel.ADMIN_MAIN.getName(), CallbackLevelExecutor::admin,
-            InlineLevel.ADMIN_USER.getName(), CallbackLevelExecutor::user,
-            InlineLevel.ADMIN_CHANNEL.getName(), CallbackLevelExecutor::channel,
-            InlineLevel.ADMIN_CONTROL_ADMIN.getName(), CallbackLevelExecutor::controlAdmin,
-            InlineLevel.ADMIN_CONTROL_MODERATOR.getName(), CallbackLevelExecutor::controlModerator,
-            InlineLevel.ADMIN_CONTROL_BAN.getName(), CallbackLevelExecutor::controlBan,
-            InlineLevel.ADD_USER_TO_ADMIN.getName(), CallbackLevelExecutor::addAdmin
+            InlineLevel.ADMIN_MAIN.getData(), CallbackLevelExecutor::admin,
+            InlineLevel.ADMIN_USER.getData(), CallbackLevelExecutor::user,
+            InlineLevel.ADMIN_CHANNEL.getData(), CallbackLevelExecutor::channel,
+            InlineLevel.ADMIN_CONTROL_ADMIN.getData(), CallbackLevelExecutor::controlAdmin,
+            InlineLevel.ADMIN_CONTROL_MODERATOR.getData(), CallbackLevelExecutor::controlModerator,
+            InlineLevel.ADMIN_CONTROL_BAN.getData(), CallbackLevelExecutor::controlBan,
+            InlineLevel.ADD_USER_TO_ADMIN_AGAIN.getData(), CallbackLevelExecutor::addAdmin,
+            InlineLevel.ADD_USER_TO_MODERATOR_AGAIN.getData(), CallbackLevelExecutor::addModerator,
+            InlineLevel.DEL_USER_FROM_ADMIN_AGAIN.getData(), CallbackLevelExecutor::removeAdmin
+
     );
     private final Executable CALLBACK_LEVEL_EXECUTOR_DEFAULT = CallbackLevelExecutor::unknown;
 

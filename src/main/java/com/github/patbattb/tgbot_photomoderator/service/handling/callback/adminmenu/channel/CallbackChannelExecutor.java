@@ -30,7 +30,7 @@ public class CallbackChannelExecutor {
                 .chatId(methodContainer.getChatId())
                 .messageId(methodContainer.getMessageId())
                 .replyMarkup(KeyboardMarkupProvider
-                        .getAdminMainKeyboardMarkup(InlineLevel.ADMIN_MAIN.getName()))
+                        .getAdminMainKeyboardMarkup(InlineLevel.ADMIN_MAIN))
                 .build();
         methodContainer.getMethodList().add(editMessage);
     }

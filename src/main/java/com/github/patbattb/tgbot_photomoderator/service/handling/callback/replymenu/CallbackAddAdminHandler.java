@@ -1,4 +1,4 @@
-package com.github.patbattb.tgbot_photomoderator.service.handling.callback.adduser;
+package com.github.patbattb.tgbot_photomoderator.service.handling.callback.replymenu;
 
 import com.github.patbattb.tgbot_photomoderator.component.InlineButton;
 import com.github.patbattb.tgbot_photomoderator.component.MethodContainer;
