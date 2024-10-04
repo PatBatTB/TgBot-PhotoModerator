@@ -8,15 +8,14 @@ import lombok.experimental.UtilityClass;
 import java.util.Map;
 
 @UtilityClass
-public class CallbackDelAdminHandler {
-    private final Map<String, Executable> DEL_ADMIN_MAP = Map.of(
-            InlineButton.YES.getData(), CallbackDelAdminExecutor::yes,
-            InlineButton.NO.getData(), CallbackDelAdminExecutor::no
+public class CallbackDelBanHandler {
+    private final Map<String, Executable> DEL_BAN_MAP = Map.of(
+            InlineButton.YES.getData(), CallbackDelBanExecutor::yes,
+            InlineButton.NO.getData(), CallbackDelBanExecutor::no
     );
-    private final Executable DEL_ADMIN_DEFAULT = CallbackDelAdminExecutor::unknown;
-
+    private final Executable DEL_BAN_DEFAULT = CallbackDelBanExecutor::unknown;
     public void process(MethodContainer methodContainer) {
-        DEL_ADMIN_MAP.getOrDefault(methodContainer.getCallbackData().button(), DEL_ADMIN_DEFAULT)
+        DEL_BAN_MAP.getOrDefault(methodContainer.getCallbackData().button(), DEL_BAN_DEFAULT)
                 .execute(methodContainer);
     }
 }

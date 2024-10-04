@@ -1,15 +1,13 @@
 package com.github.patbattb.tgbot_photomoderator.service.handling.callback;
 
 import com.github.patbattb.tgbot_photomoderator.component.MethodContainer;
-import com.github.patbattb.tgbot_photomoderator.service.handling.callback.replymenu.CallbackAddAdminHandler;
-import com.github.patbattb.tgbot_photomoderator.service.handling.callback.replymenu.CallbackAddModeratorHandler;
+import com.github.patbattb.tgbot_photomoderator.service.handling.callback.replymenu.*;
 import com.github.patbattb.tgbot_photomoderator.service.handling.callback.adminmenu.mainmenu.CallbackMainMenuHandler;
 import com.github.patbattb.tgbot_photomoderator.service.handling.callback.adminmenu.channel.CallbackChannelHandler;
 import com.github.patbattb.tgbot_photomoderator.service.handling.callback.adminmenu.controluser.CallbackControlAdminHandler;
 import com.github.patbattb.tgbot_photomoderator.service.handling.callback.adminmenu.controluser.CallbackControlBanHandler;
 import com.github.patbattb.tgbot_photomoderator.service.handling.callback.adminmenu.controluser.CallbackControlModeratorHandler;
 import com.github.patbattb.tgbot_photomoderator.service.handling.callback.adminmenu.user.CallbackUserHandler;
-import com.github.patbattb.tgbot_photomoderator.service.handling.callback.replymenu.CallbackDelAdminHandler;
 import lombok.experimental.UtilityClass;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 
@@ -40,16 +38,28 @@ public class CallbackLevelExecutor {
         CallbackControlBanHandler.process(methodContainer);
     }
 
-    public static void addAdmin(MethodContainer methodContainer) {
+    public void addAdmin(MethodContainer methodContainer) {
         CallbackAddAdminHandler.process(methodContainer);
     }
 
-    public static void addModerator(MethodContainer methodContainer) {
+    public void addModerator(MethodContainer methodContainer) {
         CallbackAddModeratorHandler.process(methodContainer);
     }
 
-    public static void removeAdmin(MethodContainer methodContainer) {
+    public void removeAdmin(MethodContainer methodContainer) {
         CallbackDelAdminHandler.process(methodContainer);
+    }
+
+    public void removeBan(MethodContainer methodContainer) {
+        CallbackDelBanHandler.process(methodContainer);
+    }
+
+    public void removeModerator(MethodContainer methodContainer) {
+        CallbackDelModeratorHandler.process(methodContainer);
+    }
+
+    public static void leaveGroup(MethodContainer methodContainer) {
+        CallbackLeaveGroupHandler.process(methodContainer);
     }
 
     public void unknown(MethodContainer methodContainer) {

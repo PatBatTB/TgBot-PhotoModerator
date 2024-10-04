@@ -68,6 +68,12 @@ public final class DataContainer {
             return false;
         }
 
+        public static boolean removeFromGroup(UserGroup userGroup, Long userId) {
+            boolean result = userGroupMap.get(userGroup).remove(String.valueOf(userId));
+            if (result) JsonHandler.saveData();
+            return result;
+        }
+
         public static boolean addToList(User user) {
             Container.userList.removeIf(user::equals);
             boolean result = userList.add(user);
@@ -84,9 +90,9 @@ public final class DataContainer {
         }
 
         @SuppressWarnings("all")
-        public static boolean setChatState(String chatId, UserState state) {
+        public static boolean setUserState(String userId, UserState state) {
             Optional<User> optional = userList.stream()
-                    .filter(elem -> Objects.equals(elem.id(), chatId))
+                    .filter(elem -> Objects.equals(elem.id(), userId))
                     .findAny();
             return optional.filter(user -> addToList(new User.Updater(user).userState(state).update())).isPresent();
 

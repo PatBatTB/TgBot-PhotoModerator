@@ -9,23 +9,25 @@ import org.telegram.telegrambots.meta.api.methods.updatingmessages.DeleteMessage
 import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageText;
 
 @UtilityClass
-public class CallbackAddModeratorExecutor {
-
+public class CallbackDelBanExecutor {
     public void yes(MethodContainer methodContainer) {
-        EditMessageText message = new EditMessageText("Введите UserName пользователя еще раз.");
-        message.setMessageId(methodContainer.getMessageId());
-        message.setChatId(methodContainer.getChatId());
-        DataContainer.Container.setUserState(methodContainer.getUser().id(), UserState.ADD_MODERATOR);
-        methodContainer.getMethodList().add(message);
+        EditMessageText editMessageText = EditMessageText.builder()
+                .messageId(methodContainer.getMessageId())
+                .chatId(methodContainer.getChatId())
+                .text("Введите UserName пользователя еще раз.")
+                .build();
+        DataContainer.Container.setUserState(methodContainer.getUser().id(), UserState.DEL_BAN);
+        methodContainer.getMethodList().add(editMessageText);
     }
 
     public void no(MethodContainer methodContainer) {
-        DeleteMessage deleteMessage = new DeleteMessage(methodContainer.getChatId(), methodContainer.getMessageId());
-        methodContainer.getMethodList().add(deleteMessage);
+        DeleteMessage delete = new DeleteMessage(methodContainer.getChatId(), methodContainer.getMessageId());
+        methodContainer.getMethodList().add(delete);
     }
 
     public void unknown(MethodContainer methodContainer) {
         //TODO
-        methodContainer.getMethodList().add(new SendMessage(methodContainer.getChatId(), "CallbackAddModeratorExecutor - unknown"));
+        //mock
+        methodContainer.getMethodList().add(new SendMessage(methodContainer.getChatId(), "CallbackDelBanExecutor - unknown"));
     }
 }

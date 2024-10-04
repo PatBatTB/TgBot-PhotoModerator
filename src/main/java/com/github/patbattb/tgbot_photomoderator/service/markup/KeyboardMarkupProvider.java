@@ -14,9 +14,9 @@ public class KeyboardMarkupProvider {
 
     public InlineKeyboardMarkup getAdminMainKeyboardMarkup(InlineLevel level) {
         return new InlineKeyboardMarkup(List.of(
-                List.of(getButton(level, InlineButton.CHANNEL),
-                        getButton(level, InlineButton.USER)),
-                List.of(getButton(level, InlineButton.CLOSE))
+                List.of(//getButton(level, InlineButton.CHANNEL),
+                        getButton(level, InlineButton.USER),
+                        getButton(level, InlineButton.CLOSE))
         ));
     }
 

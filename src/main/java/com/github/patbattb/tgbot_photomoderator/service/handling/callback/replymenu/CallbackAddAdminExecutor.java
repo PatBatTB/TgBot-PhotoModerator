@@ -14,7 +14,7 @@ public class CallbackAddAdminExecutor {
         EditMessageText message = new EditMessageText("Введите UserName пользователя еще раз.");
         message.setMessageId(methodContainer.getMessageId());
         message.setChatId(methodContainer.getChatId());
-        DataContainer.Container.setChatState(methodContainer.getUser().id(), UserState.ADD_ADMINISTRATOR);
+        DataContainer.Container.setUserState(methodContainer.getUser().id(), UserState.ADD_ADMINISTRATOR);
         methodContainer.getMethodList().add(message);
     }
 

@@ -4,26 +4,25 @@ import com.github.patbattb.tgbot_photomoderator.component.*;
 import com.github.patbattb.tgbot_photomoderator.service.markup.KeyboardMarkupProvider;
 import lombok.experimental.UtilityClass;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
-import org.telegram.telegrambots.meta.api.methods.updatingmessages.DeleteMessage;
 import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageText;
 
 @UtilityClass
 public class CallbackControlAdminExecutor {
     public void add(MethodContainer methodContainer) {
-        DeleteMessage delete = new DeleteMessage(methodContainer.getChatId(), methodContainer.getMessageId());
-        methodContainer.getMethodList().add(delete);
-        DataContainer.Container.setChatState(methodContainer.getUser().id(), UserState.ADD_ADMINISTRATOR);
-        SendMessage message = new SendMessage(methodContainer.getChatId(), "Укажите UserName пользователя\n" +
+        DataContainer.Container.setUserState(methodContainer.getUser().id(), UserState.ADD_ADMINISTRATOR);
+        EditMessageText message = new EditMessageText("Укажите UserName пользователя\n" +
                 "для добавления в список администраторов.");
+        message.setChatId(methodContainer.getChatId());
+        message.setMessageId(methodContainer.getMessageId());
         methodContainer.getMethodList().add(message);
     }
 
     public void remove(MethodContainer methodContainer) {
-        DeleteMessage delete = new DeleteMessage(methodContainer.getChatId(), methodContainer.getMessageId());
-        methodContainer.getMethodList().add(delete);
-        DataContainer.Container.setChatState(methodContainer.getUser().id(), UserState.DEL_ADMINISTRATOR);
-        SendMessage message = new SendMessage(methodContainer.getChatId(), "Укажите UserName пользователя\n" +
+        DataContainer.Container.setUserState(methodContainer.getUser().id(), UserState.DEL_ADMINISTRATOR);
+        EditMessageText message = new EditMessageText("Укажите UserName пользователя\n" +
                 "для удаления его из списка администраторов.");
+        message.setChatId(methodContainer.getChatId());
+        message.setMessageId(methodContainer.getMessageId());
         methodContainer.getMethodList().add(message);
     }
 

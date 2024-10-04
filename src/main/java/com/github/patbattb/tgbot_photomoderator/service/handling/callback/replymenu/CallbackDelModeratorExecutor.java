@@ -9,13 +9,12 @@ import org.telegram.telegrambots.meta.api.methods.updatingmessages.DeleteMessage
 import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageText;
 
 @UtilityClass
-public class CallbackAddModeratorExecutor {
-
+public class CallbackDelModeratorExecutor {
     public void yes(MethodContainer methodContainer) {
         EditMessageText message = new EditMessageText("Введите UserName пользователя еще раз.");
         message.setMessageId(methodContainer.getMessageId());
         message.setChatId(methodContainer.getChatId());
-        DataContainer.Container.setUserState(methodContainer.getUser().id(), UserState.ADD_MODERATOR);
+        DataContainer.Container.setUserState(methodContainer.getUser().id(), UserState.DEL_MODERATOR);
         methodContainer.getMethodList().add(message);
     }
 
@@ -26,6 +25,7 @@ public class CallbackAddModeratorExecutor {
 
     public void unknown(MethodContainer methodContainer) {
         //TODO
-        methodContainer.getMethodList().add(new SendMessage(methodContainer.getChatId(), "CallbackAddModeratorExecutor - unknown"));
+        //mock
+        methodContainer.getMethodList().add(new SendMessage(methodContainer.getChatId(), "CallbackDelModeratorExecutor - unknown"));
     }
 }

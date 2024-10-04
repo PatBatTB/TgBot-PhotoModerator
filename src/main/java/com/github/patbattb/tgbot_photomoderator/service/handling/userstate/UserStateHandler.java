@@ -11,8 +11,11 @@ import java.util.Map;
 public class UserStateHandler {
     private final Map<UserState, Executable> CHAT_STATE_MAP = Map.of(
             UserState.ADD_ADMINISTRATOR, UserStateExecutor::addAdmin,
+            UserState.DEL_ADMINISTRATOR, UserStateExecutor::removeAdmin,
             UserState.ADD_MODERATOR, UserStateExecutor::addModerator,
-            UserState.DEL_ADMINISTRATOR, UserStateExecutor::removeAdministrator
+            UserState.DEL_MODERATOR, UserStateExecutor::removeModerator,
+            UserState.ADD_BAN, UserStateExecutor::addBan,
+            UserState.DEL_BAN, UserStateExecutor::removeBan
     );
     private final Executable CHAT_STATE_DEFAULT = UserStateExecutor::defaultState;
 

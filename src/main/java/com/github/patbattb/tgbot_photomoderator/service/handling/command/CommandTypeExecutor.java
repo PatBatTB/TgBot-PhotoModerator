@@ -1,6 +1,7 @@
 package com.github.patbattb.tgbot_photomoderator.service.handling.command;
 
 import com.github.patbattb.tgbot_photomoderator.component.AdminPanelTitle;
+import com.github.patbattb.tgbot_photomoderator.component.DataContainer;
 import com.github.patbattb.tgbot_photomoderator.component.InlineLevel;
 import com.github.patbattb.tgbot_photomoderator.component.MethodContainer;
 import com.github.patbattb.tgbot_photomoderator.service.markup.KeyboardMarkupProvider;
@@ -30,9 +31,10 @@ public class CommandTypeExecutor {
     }
 
     public void leave(MethodContainer methodContainer) {
-        //TODO
-        //mock
-        methodContainer.getMethodList().add(new SendMessage(methodContainer.getChatId(), "CommandTypeExecutor - leave"));
+        String groupName = DataContainer.Container.getUserGroup(methodContainer.getUser().id()).getName();
+        SendMessage message = new SendMessage(methodContainer.getChatId(), "Вы действительно хотите покинуть группу \"" + groupName + "\"?");
+        message.setReplyMarkup(KeyboardMarkupProvider.getYesNoKeyboardMarkup(InlineLevel.LEAVE_GROUP));
+        methodContainer.getMethodList().add(message);
     }
 
     public void error(MethodContainer methodContainer) {

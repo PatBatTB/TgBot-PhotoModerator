@@ -8,7 +8,7 @@ import java.util.List;
 public enum Command {
     RUN("/run", "Start/resume bot.", true, List.of(UserGroup.ADMIN)),
     STOP("/stop", "Stop/pause bot.", true, List.of(UserGroup.ADMIN)),
-    ADMIN_PANEL("/admin", "Open admin panel", true, List.of(UserGroup.ADMIN)),
+    ADMIN_PANEL("/control", "Open admin control panel", true, List.of(UserGroup.ADMIN)),
     LEAVE("/leave", "Leave current group", true, List.of(UserGroup.ADMIN, UserGroup.MODERATOR));
 
     private final String name;
