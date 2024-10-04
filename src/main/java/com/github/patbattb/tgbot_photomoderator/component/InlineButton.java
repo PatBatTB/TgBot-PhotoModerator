@@ -7,6 +7,7 @@ public enum InlineButton {
     CHANNEL("channelButton", "Канал"),
     SET_CHANNEL("setChannelButton", "Указать канал"),
     REMOVE_CHANNEL("removeChannelButton", "Удалить канал"),
+    COORDS("coordinatesButton", "Координаты"),
     USER("userButton","Пользователи"),
     ADMIN("adminButton","Администраторы"),
     MODERATOR("moderatorButton", "Модераторы"),

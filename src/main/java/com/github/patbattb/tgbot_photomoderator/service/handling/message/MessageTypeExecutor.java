@@ -17,8 +17,13 @@ public class MessageTypeExecutor {
         CommandTypeHandler.process(methodContainer);
     }
 
-    public void unknown(MethodContainer methodContainer) {
-        methodContainer.getMethodList().add(new SendMessage(methodContainer.getChatId(), "MessageTypeExecutor - unknown"));
+    public void photo(MethodContainer methodContainer) {
+        //TODO
+        methodContainer.getMethodList().add(new SendMessage(methodContainer.getChatId(), "MessageTypeExecutor - photo"));
     }
 
+    public void unknown(MethodContainer methodContainer) {
+        //TODO
+        methodContainer.getMethodList().add(new SendMessage(methodContainer.getChatId(), "MessageTypeExecutor - unknown"));
+    }
 }

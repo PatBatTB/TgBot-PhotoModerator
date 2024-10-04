@@ -1,9 +1,6 @@
 package com.github.patbattb.tgbot_photomoderator.service.handling.command;
 
-import com.github.patbattb.tgbot_photomoderator.component.AdminPanelTitle;
-import com.github.patbattb.tgbot_photomoderator.component.DataContainer;
-import com.github.patbattb.tgbot_photomoderator.component.InlineLevel;
-import com.github.patbattb.tgbot_photomoderator.component.MethodContainer;
+import com.github.patbattb.tgbot_photomoderator.component.*;
 import com.github.patbattb.tgbot_photomoderator.service.markup.KeyboardMarkupProvider;
 import lombok.experimental.UtilityClass;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
@@ -19,15 +16,15 @@ public class CommandTypeExecutor {
     }
 
     public void run(MethodContainer methodContainer) {
-        //TODO
-        //mock
-        methodContainer.getMethodList().add(new SendMessage(methodContainer.getChatId(), "CommandTypeExecutor - run"));
+        DataContainer.Container.setBotState(BotState.RUN);
+        SendMessage message = new SendMessage(methodContainer.getChatId(), "Бот запущен.");
+        methodContainer.getMethodList().add(message);
     }
 
     public void stop(MethodContainer methodContainer) {
-        //TODO
-        //mock
-        methodContainer.getMethodList().add(new SendMessage(methodContainer.getChatId(), "CommandTypeExecutor - stop"));
+        DataContainer.Container.setBotState(BotState.STOP);
+        SendMessage message = new SendMessage(methodContainer.getChatId(), "Бот остановлен.");
+        methodContainer.getMethodList().add(message);
     }
 
     public void leave(MethodContainer methodContainer) {

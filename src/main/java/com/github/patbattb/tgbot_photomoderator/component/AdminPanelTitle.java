@@ -10,4 +10,5 @@ public class AdminPanelTitle {
     public String ADMIN_CONTROL_ADMIN_TITLE = ADMIN_USER_TITLE + "∟  Упаравление администраторами\n  ";
     public String ADMIN_CONTROL_MODERATOR_TITLE = ADMIN_USER_TITLE + "∟  Упаравление модераторами\n  ";
     public String ADMIN_CONTROL_BAN_TITLE = ADMIN_USER_TITLE + "∟  Упаравление банами пользователей\n  ";
+    public String ADMIN_COORDS_TITLE = ADMIN_USER_TITLE + "∟  Упаравление координатами\n  ";
 }

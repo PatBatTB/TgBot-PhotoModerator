@@ -14,7 +14,7 @@ public class CallbackChannelHandler {
             InlineButton.SET_CHANNEL.getData(), CallbackChannelExecutor::setChannel,
             InlineButton.RETURN.getData(), CallbackChannelExecutor::returning,
             InlineButton.REMOVE_CHANNEL.getData(), CallbackChannelExecutor::removeChannel
-    );
+            );
     private final Executable callbackChannelExecutorDefault = CallbackChannelExecutor::unknown;
 
     public static void process(MethodContainer methodContainer) {

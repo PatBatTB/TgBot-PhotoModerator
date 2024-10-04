@@ -14,7 +14,8 @@ public class MessageTypeHandler {
 
     private final Map<MessageType, Executable> MESSAGE_TYPE_EXECUTOR_MAP = Map.of(
             MessageType.TEXT, MessageTypeExecutor::text,
-            MessageType.COMMAND, MessageTypeExecutor::command
+            MessageType.COMMAND, MessageTypeExecutor::command,
+            MessageType.PHOTO, MessageTypeExecutor::photo
     );
     private final Executable MESSAGE_TYPE_EXECUTOR_DEFAULT = MessageTypeExecutor::unknown;
 
@@ -29,6 +30,8 @@ public class MessageTypeHandler {
             return MessageType.COMMAND;
         } else if (message.hasText()) {
             return MessageType.TEXT;
+        } else if (message.hasPhoto()) {
+            return MessageType.PHOTO;
         }
         return MessageType.UNKNOWN;
     }

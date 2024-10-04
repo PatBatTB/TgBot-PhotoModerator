@@ -25,7 +25,8 @@ public final class DataContainer {
         @SuppressWarnings("FieldMayBeFinal") //Makes not final for GSON lib
         private static Map<UserGroup, Set<String>> userGroupMap;
         @Getter
-        @Setter
+        private static BotState botState;
+        @Getter
         private static String channel;
         @SuppressWarnings("FieldMayBeFinal")
         private static Set<User> userList;
@@ -38,6 +39,20 @@ public final class DataContainer {
             );
             channel = "";
             userList = new HashSet<>();
+        }
+
+        public static void setBotState(BotState botState) {
+            if (!botState.equals(Container.botState)) {
+                Container.botState = botState;
+                JsonHandler.saveData();
+            }
+        }
+
+        public static void setChannel(String channel) {
+            if (!channel.equals(Container.channel)) {
+                Container.channel = channel;
+                JsonHandler.saveData();
+            }
         }
 
         public static boolean addToGroup(UserGroup userGroup, String userName) {
@@ -89,7 +104,6 @@ public final class DataContainer {
             return optional.orElse(UserState.NO_STATE);
         }
 
-        @SuppressWarnings("all")
         public static boolean setUserState(String userId, UserState state) {
             Optional<User> optional = userList.stream()
                     .filter(elem -> Objects.equals(elem.id(), userId))
@@ -104,13 +118,6 @@ public final class DataContainer {
                     .map(Map.Entry::getKey)
                     .findAny();
             return optional.orElse(UserGroup.OTHER);
-        }
-
-        private static Optional<String> getId(String userName) {
-            return userList.stream()
-                    .filter(elem -> Objects.equals(elem.userName(), userName))
-                    .map(User::id)
-                    .findAny();
         }
 
         /**
@@ -133,6 +140,13 @@ public final class DataContainer {
             }
             userList.addAll(modifiedUsers);
             return result;
+        }
+
+        private static Optional<String> getId(String userName) {
+            return userList.stream()
+                    .filter(elem -> Objects.equals(elem.userName(), userName))
+                    .map(User::id)
+                    .findAny();
         }
     }
 }
