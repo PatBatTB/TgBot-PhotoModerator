@@ -4,11 +4,12 @@ import com.github.patbattb.tgbot_photomoderator.component.DataContainer;
 import com.github.patbattb.tgbot_photomoderator.component.MethodContainer;
 import com.github.patbattb.tgbot_photomoderator.component.UserState;
 import lombok.experimental.UtilityClass;
-import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
+import lombok.extern.slf4j.Slf4j;
 import org.telegram.telegrambots.meta.api.methods.updatingmessages.DeleteMessage;
 import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageText;
 
 @UtilityClass
+@Slf4j
 public class CallbackDelBanExecutor {
     public void yes(MethodContainer methodContainer) {
         EditMessageText editMessageText = EditMessageText.builder()
@@ -26,8 +27,6 @@ public class CallbackDelBanExecutor {
     }
 
     public void unknown(MethodContainer methodContainer) {
-        //TODO
-        //mock
-        methodContainer.getMethodList().add(new SendMessage(methodContainer.getChatId(), "CallbackDelBanExecutor - unknown"));
+        log.error("default method");
     }
 }

@@ -5,16 +5,17 @@ import com.github.patbattb.tgbot_photomoderator.component.InlineLevel;
 import com.github.patbattb.tgbot_photomoderator.component.MethodContainer;
 import com.github.patbattb.tgbot_photomoderator.service.markup.KeyboardMarkupProvider;
 import lombok.experimental.UtilityClass;
-import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
+import lombok.extern.slf4j.Slf4j;
 import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageText;
 
 @UtilityClass
+@Slf4j
 public class CallbackUserExecutor {
     public void admin(MethodContainer methodContainer) {
         EditMessageText editMessageText = EditMessageText.builder()
                 .chatId(methodContainer.getChatId())
                 .messageId(methodContainer.getMessageId())
-                .text(AdminPanelTitle.ADMIN_CONTROL_ADMIN_TITLE)
+                .text(AdminPanelTitle.CONTROL_ADMIN_TITLE)
                 .replyMarkup(KeyboardMarkupProvider
                         .getAdminControlUserKeyboardMarkup(InlineLevel.ADMIN_CONTROL_ADMIN))
                 .build();
@@ -25,7 +26,7 @@ public class CallbackUserExecutor {
         EditMessageText editMessageText = EditMessageText.builder()
                 .chatId(methodContainer.getChatId())
                 .messageId(methodContainer.getMessageId())
-                .text(AdminPanelTitle.ADMIN_CONTROL_MODERATOR_TITLE)
+                .text(AdminPanelTitle.CONTROL_MODERATOR_TITLE)
                 .replyMarkup(KeyboardMarkupProvider
                         .getAdminControlUserKeyboardMarkup(InlineLevel.ADMIN_CONTROL_MODERATOR))
                 .build();
@@ -36,7 +37,7 @@ public class CallbackUserExecutor {
         EditMessageText editMessageText = EditMessageText.builder()
                 .chatId(methodContainer.getChatId())
                 .messageId(methodContainer.getMessageId())
-                .text(AdminPanelTitle.ADMIN_CONTROL_BAN_TITLE)
+                .text(AdminPanelTitle.CONTROL_BAN_TITLE)
                 .replyMarkup(KeyboardMarkupProvider
                         .getAdminControlUserKeyboardMarkup(InlineLevel.ADMIN_CONTROL_BAN))
                 .build();
@@ -47,7 +48,7 @@ public class CallbackUserExecutor {
         EditMessageText editMessageText = EditMessageText.builder()
                 .chatId(methodContainer.getChatId())
                 .messageId(methodContainer.getMessageId())
-                .text(AdminPanelTitle.ADMIN_MAIN_TITLE)
+                .text(AdminPanelTitle.MAIN_TITLE)
                 .replyMarkup(KeyboardMarkupProvider
                         .getAdminMainKeyboardMarkup(InlineLevel.ADMIN_MAIN))
                 .build();
@@ -55,8 +56,6 @@ public class CallbackUserExecutor {
     }
 
     public void unknown(MethodContainer methodContainer) {
-        //TODO
-        //Mock
-        methodContainer.getMethodList().add(new SendMessage(methodContainer.getChatId(), "CallbackUserExecutor - unknown"));
+        log.error("default method");
     }
 }

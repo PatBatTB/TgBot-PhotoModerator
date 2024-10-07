@@ -4,9 +4,10 @@ import com.github.patbattb.tgbot_photomoderator.component.MethodContainer;
 import com.github.patbattb.tgbot_photomoderator.service.handling.callback.CallbackLevelHandler;
 import com.github.patbattb.tgbot_photomoderator.service.handling.message.MessageTypeHandler;
 import lombok.experimental.UtilityClass;
-import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
+import lombok.extern.slf4j.Slf4j;
 
 @UtilityClass
+@Slf4j
 public class UpdateTypeExecutor {
 
     public void message(MethodContainer methodContainer) {
@@ -18,8 +19,6 @@ public class UpdateTypeExecutor {
     }
 
     public void unknown(MethodContainer methodContainer) {
-        //TODO
-        //Mock
-        methodContainer.getMethodList().add(new SendMessage(methodContainer.getChatId(), "UpdateTypeExecutor - unknown"));
+        log.error("default method");
     }
 }

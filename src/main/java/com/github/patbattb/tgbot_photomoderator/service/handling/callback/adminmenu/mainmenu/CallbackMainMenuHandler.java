@@ -12,7 +12,8 @@ public class CallbackMainMenuHandler {
     private final Map<String, Executable> callbackAdminExecutorMap = Map.of(
             InlineButton.CHANNEL.getData(), CallbackMainMenuExecutor::channel,
             InlineButton.USER.getData(), CallbackMainMenuExecutor::user,
-            InlineButton.CLOSE.getData(), CallbackMainMenuExecutor::close
+            InlineButton.CLOSE.getData(), CallbackMainMenuExecutor::close,
+            InlineButton.LOCATION.getData(), CallbackMainMenuExecutor::location
     );
     private final Executable callbackAdminExecutorDefault = CallbackMainMenuExecutor::unknown;
 

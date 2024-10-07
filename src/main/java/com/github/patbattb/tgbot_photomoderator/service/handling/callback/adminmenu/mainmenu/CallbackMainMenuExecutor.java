@@ -5,15 +5,16 @@ import com.github.patbattb.tgbot_photomoderator.component.InlineLevel;
 import com.github.patbattb.tgbot_photomoderator.component.MethodContainer;
 import com.github.patbattb.tgbot_photomoderator.service.markup.KeyboardMarkupProvider;
 import lombok.experimental.UtilityClass;
-import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
+import lombok.extern.slf4j.Slf4j;
 import org.telegram.telegrambots.meta.api.methods.updatingmessages.DeleteMessage;
 import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageText;
 
 @UtilityClass
+@Slf4j
 public class CallbackMainMenuExecutor {
     public void user(MethodContainer methodContainer) {
         EditMessageText editMessage = EditMessageText.builder()
-                .text(AdminPanelTitle.ADMIN_USER_TITLE)
+                .text(AdminPanelTitle.USER_TITLE)
                 .chatId(methodContainer.getChatId())
                 .messageId(methodContainer.getMessageId())
                 .replyMarkup(KeyboardMarkupProvider
@@ -24,7 +25,7 @@ public class CallbackMainMenuExecutor {
 
     public void channel(MethodContainer methodContainer) {
         EditMessageText editMessage = EditMessageText.builder()
-                .text(AdminPanelTitle.ADMIN_CHANNEL_TITLE)
+                .text(AdminPanelTitle.CHANNEL_TITLE)
                 .chatId(methodContainer.getChatId())
                 .messageId(methodContainer.getMessageId())
                 .replyMarkup(KeyboardMarkupProvider.
@@ -33,12 +34,23 @@ public class CallbackMainMenuExecutor {
         methodContainer.getMethodList().add(editMessage);
     }
 
+    public static void location(MethodContainer methodContainer) {
+        EditMessageText editMessageText = EditMessageText.builder()
+                .text(AdminPanelTitle.LOCATION_TITLE)
+                .chatId(methodContainer.getChatId())
+                .messageId(methodContainer.getMessageId())
+                .replyMarkup(KeyboardMarkupProvider.
+                        getAdminLocationKeyboardMarkup(InlineLevel.ADMIN_LOCATION))
+                .build();
+        methodContainer.getMethodList().add(editMessageText);
+    }
+
     public void close(MethodContainer methodContainer) {
         DeleteMessage delete = new DeleteMessage(methodContainer.getChatId(), methodContainer.getMessageId());
         methodContainer.getMethodList().add(delete);
     }
 
     public void unknown(MethodContainer methodContainer) {
-        methodContainer.getMethodList().add(new SendMessage(methodContainer.getChatId(), "CallbackAdminExecutor - unknown"));
+        log.error("default method");
     }
 }

@@ -16,7 +16,7 @@ public class KeyboardMarkupProvider {
         return new InlineKeyboardMarkup(List.of(
                 List.of(getButton(level, InlineButton.CHANNEL),
                         getButton(level, InlineButton.USER)),
-                List.of(getButton(level, InlineButton.COORDS),
+                List.of(getButton(level, InlineButton.LOCATION),
                         getButton(level, InlineButton.CLOSE))
         ));
     }
@@ -50,6 +50,13 @@ public class KeyboardMarkupProvider {
                 List.of(getButton(level, InlineButton.ADD),
                         getButton(level, InlineButton.REMOVE)),
                 List.of(getButton(level, InlineButton.RETURN))
+        ));
+    }
+
+    public static InlineKeyboardMarkup getAdminLocationKeyboardMarkup(InlineLevel level) {
+        return new InlineKeyboardMarkup(List.of(
+                List.of(getButton(level, InlineButton.SET_LOCATION),
+                        getButton(level, InlineButton.RETURN))
         ));
     }
 

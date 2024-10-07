@@ -4,11 +4,12 @@ import com.github.patbattb.tgbot_photomoderator.component.DataContainer;
 import com.github.patbattb.tgbot_photomoderator.component.MethodContainer;
 import com.github.patbattb.tgbot_photomoderator.component.UserState;
 import lombok.experimental.UtilityClass;
-import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
+import lombok.extern.slf4j.Slf4j;
 import org.telegram.telegrambots.meta.api.methods.updatingmessages.DeleteMessage;
 import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageText;
 
 @UtilityClass
+@Slf4j
 public class CallbackDelAdminExecutor {
     public void yes(MethodContainer methodContainer) {
         EditMessageText message = new EditMessageText("Введите UserName пользователя еще раз.");
@@ -24,7 +25,6 @@ public class CallbackDelAdminExecutor {
     }
 
     public void unknown(MethodContainer methodContainer) {
-        //TODO
-        methodContainer.getMethodList().add(new SendMessage(methodContainer.getChatId(), "CallbackDelAdminExecutor - unknown"));
+        log.error("default method");
     }
 }

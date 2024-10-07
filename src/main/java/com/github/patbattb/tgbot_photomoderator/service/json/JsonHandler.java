@@ -1,6 +1,8 @@
 package com.github.patbattb.tgbot_photomoderator.service.json;
 
 import com.github.patbattb.tgbot_photomoderator.component.DataContainer;
+import com.google.gson.ExclusionStrategy;
+import com.google.gson.FieldAttributes;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import lombok.experimental.UtilityClass;
@@ -11,6 +13,7 @@ import java.io.Writer;
 import java.lang.reflect.Modifier;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.time.LocalDateTime;
 
 @UtilityClass
 public class JsonHandler {
@@ -18,6 +21,18 @@ public class JsonHandler {
     final Path JSON_PATH = Path.of("props/props.json");
     final Gson GSON = new GsonBuilder()
             .setPrettyPrinting()
+            .registerTypeAdapter(LocalDateTime.class, new DateTimeSerializer())
+            .addSerializationExclusionStrategy(new ExclusionStrategy() {
+                @Override
+                public boolean shouldSkipField(FieldAttributes f) {
+                    return f.getAnnotation(Exclude.class) != null;
+                }
+
+                @Override
+                public boolean shouldSkipClass(Class<?> clazz) {
+                    return false;
+                }
+            })
             .excludeFieldsWithModifiers(Modifier.ABSTRACT)
             .create();
 

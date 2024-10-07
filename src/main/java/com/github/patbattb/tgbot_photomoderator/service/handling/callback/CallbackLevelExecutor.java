@@ -1,6 +1,7 @@
 package com.github.patbattb.tgbot_photomoderator.service.handling.callback;
 
 import com.github.patbattb.tgbot_photomoderator.component.MethodContainer;
+import com.github.patbattb.tgbot_photomoderator.service.handling.callback.location.CallbackLocationHandler;
 import com.github.patbattb.tgbot_photomoderator.service.handling.callback.replymenu.*;
 import com.github.patbattb.tgbot_photomoderator.service.handling.callback.adminmenu.mainmenu.CallbackMainMenuHandler;
 import com.github.patbattb.tgbot_photomoderator.service.handling.callback.adminmenu.channel.CallbackChannelHandler;
@@ -9,9 +10,10 @@ import com.github.patbattb.tgbot_photomoderator.service.handling.callback.adminm
 import com.github.patbattb.tgbot_photomoderator.service.handling.callback.adminmenu.controluser.CallbackControlModeratorHandler;
 import com.github.patbattb.tgbot_photomoderator.service.handling.callback.adminmenu.user.CallbackUserHandler;
 import lombok.experimental.UtilityClass;
-import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
+import lombok.extern.slf4j.Slf4j;
 
 @UtilityClass
+@Slf4j
 public class CallbackLevelExecutor {
 
     public void admin(MethodContainer methodContainer) {
@@ -62,8 +64,11 @@ public class CallbackLevelExecutor {
         CallbackLeaveGroupHandler.process(methodContainer);
     }
 
+    public static void location(MethodContainer methodContainer) {
+        CallbackLocationHandler.process(methodContainer);
+    }
+
     public void unknown(MethodContainer methodContainer) {
-        //TODO
-        methodContainer.getMethodList().add(new SendMessage(methodContainer.getChatId(), "CallbackLevelExecutor - unknown"));
+        log.error("default method");
     }
 }

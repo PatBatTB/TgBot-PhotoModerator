@@ -15,7 +15,9 @@ public class UserStateHandler {
             UserState.ADD_MODERATOR, UserStateExecutor::addModerator,
             UserState.DEL_MODERATOR, UserStateExecutor::removeModerator,
             UserState.ADD_BAN, UserStateExecutor::addBan,
-            UserState.DEL_BAN, UserStateExecutor::removeBan
+            UserState.DEL_BAN, UserStateExecutor::removeBan,
+            UserState.SET_FIRST_COORD, UserStateExecutor::setFirstCoord,
+            UserState.SET_SECOND_COORD, UserStateExecutor::setSecondCoord
     );
     private final Executable CHAT_STATE_DEFAULT = UserStateExecutor::defaultState;
 

@@ -6,13 +6,14 @@ import com.github.patbattb.tgbot_photomoderator.component.InlineLevel;
 import com.github.patbattb.tgbot_photomoderator.component.MethodContainer;
 import com.github.patbattb.tgbot_photomoderator.service.markup.KeyboardMarkupProvider;
 import lombok.experimental.UtilityClass;
+import lombok.extern.slf4j.Slf4j;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.methods.updatingmessages.DeleteMessage;
 import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageText;
 
 @UtilityClass
+@Slf4j
 public class CallbackChannelExecutor {
-
 
     public void setChannel(MethodContainer methodContainer) {
         DeleteMessage deleteMessage = new DeleteMessage(methodContainer.getChatId(), methodContainer.getMessageId());
@@ -42,7 +43,7 @@ public class CallbackChannelExecutor {
 
     public void returning(MethodContainer methodContainer) {
         EditMessageText editMessage = EditMessageText.builder()
-                .text(AdminPanelTitle.ADMIN_MAIN_TITLE)
+                .text(AdminPanelTitle.MAIN_TITLE)
                 .chatId(methodContainer.getChatId())
                 .messageId(methodContainer.getMessageId())
                 .replyMarkup(KeyboardMarkupProvider
@@ -53,8 +54,6 @@ public class CallbackChannelExecutor {
 
 
     public void unknown(MethodContainer methodContainer) {
-        //TODO
-        //mock
-        methodContainer.getMethodList().add(new SendMessage(methodContainer.getChatId(), "CallbackChannelExecutor - unknown"));
+        log.error("default method");
     }
 }

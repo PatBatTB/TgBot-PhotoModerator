@@ -3,10 +3,11 @@ package com.github.patbattb.tgbot_photomoderator.service.handling.callback.admin
 import com.github.patbattb.tgbot_photomoderator.component.*;
 import com.github.patbattb.tgbot_photomoderator.service.markup.KeyboardMarkupProvider;
 import lombok.experimental.UtilityClass;
-import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
+import lombok.extern.slf4j.Slf4j;
 import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageText;
 
 @UtilityClass
+@Slf4j
 public class CallbackControlBanExecutor {
     public void add(MethodContainer methodContainer) {
         DataContainer.Container.setUserState(methodContainer.getUser().id(), UserState.ADD_BAN);
@@ -32,15 +33,13 @@ public class CallbackControlBanExecutor {
         EditMessageText editMessageText = EditMessageText.builder()
                 .chatId(methodContainer.getChatId())
                 .messageId(methodContainer.getMessageId())
-                .text(AdminPanelTitle.ADMIN_USER_TITLE)
+                .text(AdminPanelTitle.USER_TITLE)
                 .replyMarkup(KeyboardMarkupProvider.getAdminUserKeyboardMarkup(InlineLevel.ADMIN_USER))
                 .build();
         methodContainer.getMethodList().add(editMessageText);
     }
 
     public void unknown(MethodContainer methodContainer) {
-        //TODO
-        //mock
-        methodContainer.getMethodList().add(new SendMessage(methodContainer.getChatId(), "CallbackControlBanExecutor - unknown"));
+        log.error("default method");
     }
 }

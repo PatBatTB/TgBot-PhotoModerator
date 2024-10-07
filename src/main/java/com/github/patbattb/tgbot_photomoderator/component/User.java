@@ -20,6 +20,19 @@ public record User(String id, String firstName, String lastName, String userName
         return Objects.equals(id, user.id);
     }
 
+    public boolean deepEquals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return Objects.equals(id, user.id) &&
+                Objects.equals(firstName, user.firstName) &&
+                Objects.equals(lastName, user.lastName) &&
+                Objects.equals(userName, user.userName) &&
+                Objects.equals(state, user.state);
+
+
+    }
+
     @Override
     public int hashCode() {
         return Objects.hashCode(id);

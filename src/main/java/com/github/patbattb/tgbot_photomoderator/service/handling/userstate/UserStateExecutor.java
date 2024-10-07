@@ -2,10 +2,14 @@ package com.github.patbattb.tgbot_photomoderator.service.handling.userstate;
 
 import com.github.patbattb.tgbot_photomoderator.component.*;
 import com.github.patbattb.tgbot_photomoderator.service.markup.KeyboardMarkupProvider;
+import lombok.experimental.UtilityClass;
+import lombok.extern.slf4j.Slf4j;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 
+@UtilityClass
+@Slf4j
 public class UserStateExecutor {
-    public static void addAdmin(MethodContainer methodContainer) {
+    public void addAdmin(MethodContainer methodContainer) {
         String userName = User.trimUserName(methodContainer.getMessage().getText());
         SendMessage message = new SendMessage();
         message.setChatId(methodContainer.getChatId());
@@ -25,7 +29,7 @@ public class UserStateExecutor {
         methodContainer.getMethodList().add(message);
     }
 
-    public static void removeAdmin(MethodContainer methodContainer) {
+    public void removeAdmin(MethodContainer methodContainer) {
         String userName = User.trimUserName(methodContainer.getMessage().getText());
         SendMessage message = new SendMessage();
         message.setChatId(methodContainer.getChatId());
@@ -47,7 +51,7 @@ public class UserStateExecutor {
         methodContainer.getMethodList().add(message);
     }
 
-    public static void addModerator(MethodContainer methodContainer) {
+    public void addModerator(MethodContainer methodContainer) {
         String userName = User.trimUserName(methodContainer.getMessage().getText());
         SendMessage message = new SendMessage();
         message.setChatId(methodContainer.getChatId());
@@ -67,7 +71,7 @@ public class UserStateExecutor {
         methodContainer.getMethodList().add(message);
     }
 
-    public static void removeModerator(MethodContainer methodContainer) {
+    public void removeModerator(MethodContainer methodContainer) {
         String userName = User.trimUserName(methodContainer.getMessage().getText());
         SendMessage message = new SendMessage();
         message.setChatId(methodContainer.getChatId());
@@ -89,7 +93,7 @@ public class UserStateExecutor {
         methodContainer.getMethodList().add(message);
     }
 
-    public static void addBan(MethodContainer methodContainer) {
+    public void addBan(MethodContainer methodContainer) {
         String userName = User.trimUserName(methodContainer.getMessage().getText());
         SendMessage message = new SendMessage();
         message.setChatId(methodContainer.getChatId());
@@ -107,7 +111,7 @@ public class UserStateExecutor {
         methodContainer.getMethodList().add(message);
     }
 
-    public static void removeBan(MethodContainer methodContainer) {
+    public void removeBan(MethodContainer methodContainer) {
         String userName = User.trimUserName(methodContainer.getMessage().getText());
         SendMessage message = new SendMessage();
         message.setChatId(methodContainer.getChatId());
@@ -127,8 +131,39 @@ public class UserStateExecutor {
         methodContainer.getMethodList().add(message);
     }
 
-    public static void defaultState(MethodContainer methodContainer) {
-        //TODO
-        methodContainer.getMethodList().add(new SendMessage(methodContainer.getChatId(), "MessageSate - default"));
+    public void setFirstCoord(MethodContainer methodContainer) {
+        String coordString = methodContainer.getMessage().getText();
+        SendMessage message = new SendMessage();
+        message.setChatId(methodContainer.getChatId());
+        if (DataContainer.Container.addFirstCoordinate(Point.get(coordString))) {
+            message.setText("Первая координата добавлена.\n" +
+                    "Введите нижнюю правую координату.");
+            DataContainer.Container.setUserState(methodContainer.getUser().id(), UserState.SET_SECOND_COORD);
+        } else {
+            message.setText("Произошла внутренняя ошибка.\n" +
+                    "Координата не была добавлена. Проверьте правильность вводимой координаты и попробуйте снова.\n" +
+                    "Координату точки на карте вы можете скопировать с Яндекс карт.");
+            DataContainer.Container.setUserState(methodContainer.getUser().id(), UserState.NO_STATE);
+        }
+        methodContainer.getMethodList().add(message);
+    }
+
+    public void setSecondCoord(MethodContainer methodContainer) {
+        String coordString = methodContainer.getMessage().getText();
+        SendMessage message = new SendMessage();
+        message.setChatId(methodContainer.getChatId());
+        if (DataContainer.Container.addSecondCoordinate(Point.get(coordString))) {
+            message.setText("Координаты успешно обновлены.\n" +
+                    "Теперь фотографии будут приниматься, если для них указаны координаты из этой области.");
+        } else {
+            message.setText("Произошла внутренняя ошибка.\n" +
+                    "Координата не была добавлена. Проверьте правильность вводимой координаты и попробуйте снова.\n" +
+                    "Координату точки на карте вы можете скопировать с Яндекс карт.");
+        }
+        DataContainer.Container.setUserState(methodContainer.getUser().id(), UserState.NO_STATE);
+        methodContainer.getMethodList().add(message);
+    }
+
+    public void defaultState(MethodContainer methodContainer) {
     }
 }

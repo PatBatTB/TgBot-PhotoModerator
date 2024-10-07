@@ -4,13 +4,14 @@ import com.github.patbattb.tgbot_photomoderator.component.DataContainer;
 import com.github.patbattb.tgbot_photomoderator.component.MethodContainer;
 import com.github.patbattb.tgbot_photomoderator.component.UserGroup;
 import lombok.experimental.UtilityClass;
+import lombok.extern.slf4j.Slf4j;
 import org.telegram.telegrambots.meta.api.methods.commands.DeleteMyCommands;
-import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.methods.updatingmessages.DeleteMessage;
 import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageText;
 import org.telegram.telegrambots.meta.api.objects.commands.scope.BotCommandScopeChat;
 
 @UtilityClass
+@Slf4j
 public class CallbackLeaveGroupExecutor {
     public static void yes(MethodContainer methodContainer) {
         Long userId = methodContainer.getUpdate().getCallbackQuery().getFrom().getId();
@@ -35,8 +36,6 @@ public class CallbackLeaveGroupExecutor {
     }
 
     public static void unknown(MethodContainer methodContainer) {
-        //TODO
-        //mock
-        methodContainer.getMethodList().add(new SendMessage(methodContainer.getChatId(), "CallbackLeaveGroupExecutor - unknown"));
+        log.error("default method");
     }
 }

@@ -1,10 +1,12 @@
 package com.github.patbattb.tgbot_photomoderator.service.handling.chat;
 
+import com.github.patbattb.tgbot_photomoderator.component.Command;
 import com.github.patbattb.tgbot_photomoderator.component.DataContainer;
 import com.github.patbattb.tgbot_photomoderator.component.MethodContainer;
 import com.github.patbattb.tgbot_photomoderator.component.UserGroup;
 import com.github.patbattb.tgbot_photomoderator.service.handling.update.UpdateTypeHandler;
 import lombok.experimental.UtilityClass;
+import lombok.extern.slf4j.Slf4j;
 import org.telegram.telegrambots.meta.api.methods.groupadministration.ExportChatInviteLink;
 import org.telegram.telegrambots.meta.api.methods.groupadministration.GetChatAdministrators;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
@@ -15,9 +17,8 @@ import java.util.List;
 import java.util.Optional;
 
 @UtilityClass
+@Slf4j
 public class ChatTypeExecutor {
-
-    private final String SET_CHANNEL_COMMAND = "/setchannel";
 
     public void privateChat(MethodContainer methodContainer) {
         UpdateTypeHandler.process(methodContainer);
@@ -27,12 +28,11 @@ public class ChatTypeExecutor {
         if (UserGroup.ADMIN.equals(methodContainer.getUserGroup()) &&
                 methodContainer.getUpdate().hasMessage() &&
                 methodContainer.getMessage().hasText() &&
-                SET_CHANNEL_COMMAND.equals(methodContainer.getMessage().getText())) {
+                Command.SET_CHANNEL.getName().equals(methodContainer.getMessage().getText())) {
             GetChatAdministrators getChatAdministrators = new GetChatAdministrators(methodContainer.getChatId());
             SendMessage sendMessage = new SendMessage();
             sendMessage.setChatId(methodContainer.getUser().id());
             try {
-                //TODO необходим тест на другом пользователе. Когда он является админом у бота, но не является админом канала.
                 List<ChatMember> list = methodContainer.getBot().execute(getChatAdministrators);
                 Optional<ChatMember> optional = list.stream()
                         .filter(elem -> methodContainer.getUser().id().equals(String.valueOf(elem.getUser().getId())))
@@ -54,8 +54,6 @@ public class ChatTypeExecutor {
     }
 
     public void unknown(MethodContainer methodContainer) {
-        //TODO
-        //Mock
-        methodContainer.getMethodList().add(new SendMessage(methodContainer.getChatId(), "ChatTypeExecutor - unknown"));
+        log.debug("unknown method");
     }
 }

@@ -2,6 +2,9 @@ package com.github.patbattb.tgbot_photomoderator.component;
 
 import lombok.Getter;
 
+/**
+ * Don't use underline symbol in {@link InlineLevel#data} field.
+ */
 @Getter
 public enum InlineLevel {
     ADMIN_MAIN("adminMainLevel"),
@@ -15,7 +18,8 @@ public enum InlineLevel {
     DEL_USER_FROM_ADMIN_AGAIN("delUserFromAdminLevel"),
     DEL_USER_FROM_BAN_AGAIN("delUserFromBanLevel"),
     DEL_USER_FROM_MODERATOR_AGAIN("delUserFromModeratorLevel"),
-    LEAVE_GROUP("leaveGroupLevel");
+    LEAVE_GROUP("leaveGroupLevel"),
+    ADMIN_LOCATION("adminLocationLevel");
 
     private final String data;
 

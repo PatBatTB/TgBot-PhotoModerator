@@ -7,5 +7,7 @@ public enum UserState {
     ADD_MODERATOR,
     DEL_MODERATOR,
     ADD_BAN,
-    DEL_BAN;
+    DEL_BAN,
+    SET_FIRST_COORD,
+    SET_SECOND_COORD;
 }

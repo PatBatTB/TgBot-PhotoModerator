@@ -13,6 +13,7 @@ public class CommandTypeHandler {
     private final String ERROR = "error";
 
     private final Map<String, Executable> COMMAND_TYPE_EXECUTOR_MAP = Map.of(
+            Command.START.getName(), CommandTypeExecutor::start,
             Command.RUN.getName(), CommandTypeExecutor::run,
             Command.STOP.getName(), CommandTypeExecutor::stop,
             Command.ADMIN_PANEL.getName(), CommandTypeExecutor::adminPanel,
