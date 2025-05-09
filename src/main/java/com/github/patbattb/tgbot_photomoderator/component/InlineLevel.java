@@ -19,7 +19,8 @@ public enum InlineLevel {
     DEL_USER_FROM_BAN_AGAIN("delUserFromBanLevel"),
     DEL_USER_FROM_MODERATOR_AGAIN("delUserFromModeratorLevel"),
     LEAVE_GROUP("leaveGroupLevel"),
-    ADMIN_LOCATION("adminLocationLevel");
+    ADMIN_LOCATION("adminLocationLevel"),
+    VERIFY_PHOTO("verifyPhotoLevel");
 
     private final String data;
 

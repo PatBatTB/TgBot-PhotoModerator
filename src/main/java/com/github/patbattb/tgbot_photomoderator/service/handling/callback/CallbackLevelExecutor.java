@@ -2,6 +2,7 @@ package com.github.patbattb.tgbot_photomoderator.service.handling.callback;
 
 import com.github.patbattb.tgbot_photomoderator.component.MethodContainer;
 import com.github.patbattb.tgbot_photomoderator.service.handling.callback.location.CallbackLocationHandler;
+import com.github.patbattb.tgbot_photomoderator.service.handling.callback.photo.CallbackVerifyPhotoHandler;
 import com.github.patbattb.tgbot_photomoderator.service.handling.callback.replymenu.*;
 import com.github.patbattb.tgbot_photomoderator.service.handling.callback.adminmenu.mainmenu.CallbackMainMenuHandler;
 import com.github.patbattb.tgbot_photomoderator.service.handling.callback.adminmenu.channel.CallbackChannelHandler;
@@ -66,6 +67,10 @@ public class CallbackLevelExecutor {
 
     public static void location(MethodContainer methodContainer) {
         CallbackLocationHandler.process(methodContainer);
+    }
+
+    public void verifyPhoto(MethodContainer methodContainer) {
+        CallbackVerifyPhotoHandler.process(methodContainer);
     }
 
     public void unknown(MethodContainer methodContainer) {

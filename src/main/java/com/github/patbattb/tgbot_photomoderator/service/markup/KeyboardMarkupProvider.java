@@ -5,6 +5,7 @@ import com.github.patbattb.tgbot_photomoderator.component.InlineLevel;
 import com.github.patbattb.tgbot_photomoderator.service.handling.callback.CallBackParser;
 import lombok.experimental.UtilityClass;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboard;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 
 import java.util.List;
@@ -57,6 +58,12 @@ public class KeyboardMarkupProvider {
         return new InlineKeyboardMarkup(List.of(
                 List.of(getButton(level, InlineButton.SET_LOCATION),
                         getButton(level, InlineButton.RETURN))
+        ));
+    }
+
+    public static ReplyKeyboard getVerifyPhotoKeyboardMarkup(InlineLevel level) {
+        return new InlineKeyboardMarkup(List.of(
+                List.of(getButton(level, InlineButton.VERIFY_PHOTO))
         ));
     }
 

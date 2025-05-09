@@ -24,6 +24,7 @@ public class CallbackLevelHandler {
         put(InlineLevel.DEL_USER_FROM_BAN_AGAIN.getData(), CallbackLevelExecutor::removeBan);
         put(InlineLevel.LEAVE_GROUP.getData(), CallbackLevelExecutor::leaveGroup);
         put(InlineLevel.ADMIN_LOCATION.getData(), CallbackLevelExecutor::location);
+        put(InlineLevel.VERIFY_PHOTO.getData(), CallbackLevelExecutor::verifyPhoto);
     }};
     private final Executable CALLBACK_LEVEL_EXECUTOR_DEFAULT = CallbackLevelExecutor::unknown;
 

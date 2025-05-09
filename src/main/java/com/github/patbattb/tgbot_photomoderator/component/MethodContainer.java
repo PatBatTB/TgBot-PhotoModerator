@@ -5,10 +5,13 @@ import com.github.patbattb.tgbot_photomoderator.service.handling.update.UpdateTy
 import lombok.Data;
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
 import org.telegram.telegrambots.meta.api.objects.Message;
+import org.telegram.telegrambots.meta.api.objects.PhotoSize;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 
 @Data
 public final class MethodContainer {
@@ -23,6 +26,7 @@ public final class MethodContainer {
     private final String chatType;
     private final TgBot bot;
     private final Message message;
+    private final String photoId;
 
     public MethodContainer(Update update, TgBot bot) {
         this.bot = bot;
@@ -56,5 +60,11 @@ public final class MethodContainer {
             throw new RuntimeException("Unknown message type");
         }
         this.userGroup = DataContainer.Container.getUserGroup(this.user.id());
+        this.photoId = setPhotoId();
+    }
+
+    private String setPhotoId() {
+        Optional<PhotoSize> optional = message.getPhoto().stream().max(Comparator.comparingInt(PhotoSize::getFileSize));
+        return optional.map(PhotoSize::getFileId).orElse("");
     }
 }

@@ -46,14 +46,13 @@ public class MessageTypeExecutor {
             message.setText("Фотографии публикуются только из указанной местности. Судя по координатам фото сделано вне разрешенной области.");
         }
         else {
-            PhotoSize photoSize = methodContainer.getMessage().getPhoto().stream().max(Comparator.comparingInt(PhotoSize::getFileSize)).get();
-            Photo photo = new Photo(photoSize.getFileId(),
+            Photo photo = new Photo(methodContainer.getPhotoId(),
                     PhotoStatus.APPROVAL_WAITING,
                     Point.get(methodContainer.getMessage().getCaption()),
                     LocalDateTime.now(),
-                    methodContainer.getUser().id());
+                    methodContainer.getUser().id(), null);
             DataContainer.Container.addNewPhoto(photo);
-            MessageSender.sendPhotoVerifyMessage(methodContainer, photo);
+            MessageSender.sendPhotoVerifyMessages(methodContainer, photo);
             message.setText("Ваше фото отправлено на модерацию. После одобрения фотографии одним из модераторов, фото будет опубликовано на канале.");
         }
         methodContainer.getMethodList().add(message);

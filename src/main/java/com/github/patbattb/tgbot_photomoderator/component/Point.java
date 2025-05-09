@@ -21,4 +21,9 @@ public record Point(double x, double y) {
         double y = Double.parseDouble(matches.get(1));
         return new Point(x, y);
     }
+
+    @Override
+    public String toString() {
+        return x + ", " + y;
+    }
 }

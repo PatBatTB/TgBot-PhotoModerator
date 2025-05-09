@@ -86,16 +86,19 @@ public final class DataContainer {
             return optional.orElse(UserState.NO_STATE);
         }
 
+        public static User getUser(String userId) {
+            for (User user: userList) {
+                if (user.id().equals(userId)) return user;
+            }
+            return null;
+        }
+
         public static UserGroup getUserGroup(String userId) {
             Optional<UserGroup> optional = userGroupMap.entrySet().stream()
                     .filter(elem -> elem.getValue().contains(userId))
                     .map(Map.Entry::getKey)
                     .findAny();
             return optional.orElse(UserGroup.OTHER);
-        }
-
-        public static Set<String> getUserIds(UserGroup userGroup) {
-            return userGroupMap.get(userGroup);
         }
 
         /**
@@ -181,12 +184,30 @@ public final class DataContainer {
             return result;
         }
 
-        public static boolean updatePhotoStatus(Photo photo, PhotoStatus status) {
+        public static boolean updatePhoto(Photo photo, PhotoStatus status) {
             Optional<Photo> optional = Container.photoList.stream()
                     .filter(photo::equals).findAny();
             if (optional.isEmpty() || optional.get().status().equals(status)) return false;
             photoList.remove(photo);
-            return photoList.add(new Photo(photo.fileId(), status, photo.point(), photo.sendTime(), photo.senderId()));
+            boolean result = photoList.add(new Photo.Updater(photo).setStatus(status).update());
+            if (result) JsonHandler.saveData();
+            return result;
+        }
+
+        public static boolean updatePhoto(Photo photo, Set<AuthMessage> authMessages) {
+            Optional<Photo> optional = Container.photoList.stream()
+                    .filter(photo::equals).findAny();
+            if (optional.isEmpty()) return false;
+            photoList.remove(photo);
+            boolean result = photoList.add(new Photo.Updater(photo).setAuthMessages(authMessages).update());
+            if (result) JsonHandler.saveData();
+            return result;
+        }
+
+        public static Set<AuthMessage> getAuthMessageSet(String fileId) {
+            Optional<Set<AuthMessage>> optional = photoList.stream().filter(elem -> elem.fileId().equals(fileId))
+                    .map(Photo::authMessages).findAny();
+            return optional.orElse(new HashSet<>());
         }
 
         public static boolean checkoutPoint(Point point) {

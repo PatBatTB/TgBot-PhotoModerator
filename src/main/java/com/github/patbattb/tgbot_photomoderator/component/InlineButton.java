@@ -21,7 +21,8 @@ public enum InlineButton {
     CLOSE("closeButton", "Закрыть"),
     YES("yesButton", "Да"),
     NO("noButton", "Нет"),
-    SET_LOCATION("setLocationButton", "Задать локацию");
+    SET_LOCATION("setLocationButton", "Задать локацию"),
+    VERIFY_PHOTO("verifyPhotoButton", "Одобрить.");
 
     private final String data;
     private final String text;
